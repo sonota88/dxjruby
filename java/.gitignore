@@ -1,0 +1,12 @@
+# Maven
+
+/target/
+/.mvn/
+/mvnw
+/mvnw.cmd
+
+# Eclipse
+
+/.project
+/.settings
+/.classpath
