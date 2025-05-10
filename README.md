@@ -15,7 +15,7 @@ DXRuby/DXOpal の JRuby 移植です。
   cd java
   ./build.sh make-jar
 )
-./dxjruby.sh examples/ball.rb
+./dxjruby run examples/ball.rb
 ```
 
 

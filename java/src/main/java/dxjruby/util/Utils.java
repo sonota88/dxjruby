@@ -7,7 +7,7 @@ public class Utils {
     }
 
     public static void puts(final Object obj) {
-        String valStr;
+        final String valStr;
         if (obj == null) {
             valStr = "null";
         } else {

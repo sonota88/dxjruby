@@ -1,9 +1,12 @@
 package dxjruby;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -18,10 +21,13 @@ class MainPanel extends JPanel {
 
     private static boolean painting = false;
 
-    public MainPanel(final int winW, final int winH) {
-        setBackground(Window.getBgcolor());
-        this.setPreferredSize(new Dimension(winW, winH));
-        this.setFocusable(true);
+    public MainPanel(final int winW, final int winH, final Color bgcolor) {
+        setBackground(bgcolor);
+        setPreferredSize(new Dimension(winW, winH));
+
+        addMouseMotionListener(new MouseMotionListenerImpl());
+
+        setFocusable(true);
     }
 
     @Override
@@ -66,6 +72,22 @@ class MainPanel extends JPanel {
         } catch (InterruptedException e) {
             throw new DXJRubyException(e);
         }
+    }
+
+    // --------------------------------
+
+    private static class MouseMotionListenerImpl implements MouseMotionListener {
+
+        @Override
+        public void mouseDragged(final MouseEvent e) {
+            // ignore
+        }
+
+        @Override
+        public void mouseMoved(final MouseEvent e) {
+            Input.setMousePosition(e.getX(), e.getY());
+        }
+
     }
 
 }

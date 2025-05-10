@@ -3,6 +3,12 @@ package dxjruby;
 import static dxjruby.util.Utils.toInt;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.function.Consumer;
+
+import javax.swing.JFrame;
 
 import org.jruby.Ruby;
 import org.jruby.RubyProc;
@@ -16,17 +22,52 @@ public class Window {
     private static int height = 480;
     private static Color bgcolor = new Color(0, 0, 0);
 
+    private static MainPanel mainPanel;
     private static FpsManager fpsm;
 
     static {
         fpsm = new FpsManager();
     }
 
+    public static void start(final RubyProc proc) {
+        startGui();
+        startLoop(proc);
+    }
+
+    private static void startGui() {
+        final JFrame frame = new JFrame();
+
+        frame.setLocation(0, 0);
+
+        frame.setResizable(false);
+        frame.setTitle("DXJRuby window title");
+        setCloseOperation(frame);
+
+        mainPanel = new MainPanel(
+                getWidth(),
+                getHeight(),
+                getBgcolor()
+                );
+
+        frame.add(mainPanel);
+        frame.pack();
+
+        frame.setVisible(true);
+    }
+
+    private static void setCloseOperation(final JFrame frame) {
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(final WindowEvent e) {
+                System.exit(0);
+            }
+        });
+    }
+
     /**
      * Game Loop and Key Input - How to Make a 2D Game in Java #2 - YouTube
      * https://www.youtube.com/watch?v=VpH33Uw-_0E
      */
-    public static void startLoop(final RubyProc proc) {
+    private static void startLoop(final RubyProc proc) {
         final Ruby runtime = proc.getRuntime();
         final IRubyObject[] args = new IRubyObject[] {};
 
@@ -47,7 +88,7 @@ public class Window {
                 // update
                 proc.call(runtime.getCurrentContext(), args);
                 // repaint
-                DXJRuby.getMainPanel().repaintSync();
+                mainPanel.repaintSync();
 
                 {
                     final long tNow = System.nanoTime();
@@ -69,19 +110,39 @@ public class Window {
         return fpsm.getFps();
     }
 
+    public static void setFps(final int fps) {
+        fpsm.changeFps(fps);
+    }
+
     public static int getRealFps() {
         return fpsm.realFps;
     }
 
     // --------------------------------
 
+    public static void drawLine(
+            final double x1, final double y1,
+            final double x2, final double y2,
+            final Color c, final int z
+            ) {
+        addToDrawQueue(
+                z,
+                g2 -> {
+                    g2.setColor(c);
+                    g2.drawLine(
+                            toInt(x1), toInt(y1),
+                            toInt(x2), toInt(y2)
+                            );
+                });
+    }
+
     public static void drawCircleFill(
             final double x, final double y, final double r,
             final Color c, final int z
             ) {
-        DrawQueue.add(
+        addToDrawQueue(
                 z,
-                new Command(g2 -> {
+                g2 -> {
                     g2.setColor(c);
 
                     final double x1 = x - r;
@@ -90,7 +151,11 @@ public class Window {
                     final int diameter = toInt(r * 2);
 
                     g2.fillOval(toInt(x1), toInt(y1), diameter, diameter);
-                }));
+                });
+    }
+
+    private static void addToDrawQueue(final int z, final Consumer<Graphics2D> func) {
+        DrawQueue.add(z, new Command(func));
     }
 
     // --------------------------------

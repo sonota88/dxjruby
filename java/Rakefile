@@ -8,7 +8,7 @@ SRC_FILES = Dir.glob("src/**/*").to_a
 SRC_FILES << "pom.xml"
 
 ARTIFACT_ID = "dxjruby"
-JAR_FILE = "target/#{ARTIFACT_ID}-0.0.1-SNAPSHOT-jar-with-dependencies.jar"
+JAR_FILE = "target/#{ARTIFACT_ID}-0.0.2.jar"
 
 file JAR_FILE => SRC_FILES do
   sh %( ./build.sh make-jar )

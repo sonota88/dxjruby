@@ -1,11 +1,12 @@
 require 'java'
 
 require File.expand_path(
-          '../java/target/dxjruby-0.0.1-SNAPSHOT-jar-with-dependencies.jar',
+          '../java/target/dxjruby-0.0.2.jar',
           __dir__
         )
 
 require 'dxjruby/constants/colors'
+require 'dxjruby/input'
 require 'dxjruby/window'
 require 'dxjruby/version'
 

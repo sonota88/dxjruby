@@ -1,6 +1,3 @@
-# Forked from DXOpal
-# https://github.com/yhara/dxopal/blob/v1.6.0/examples/top_page/main.rb
-
 case RUBY_ENGINE
 when "opal"  then require "dxopal" ; include DXOpal
 when "jruby" then require "dxjruby"; include DXJRuby

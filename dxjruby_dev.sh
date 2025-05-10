@@ -10,4 +10,4 @@ readonly __DIR__="$( cd "$(dirname "$0")"; pwd )"
   rake make_jar
 )
 
-${__DIR__}/dxjruby.sh "$@"
+${__DIR__}/dxjruby "$@"

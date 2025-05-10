@@ -15,10 +15,7 @@ module DXJRuby
     # When called twice, previous loop is stopped (this is useful
     # when implementing interactive game editor, etc.)
     def self.loop(&block)
-      dxjruby = Java::dxjruby.DXJRuby.new
-      dxjruby.start()
-
-      j_Window.startLoop(block)
+      j_Window.start(block)
     end
 
     # # (DXOpal original) Pause & resume
@@ -36,26 +33,33 @@ module DXJRuby
     # def self._img
 
     # def self.fps
-    # def self.fps=(w)
-    # def self.real_fps
+
+    def self.fps=(fps)
+      j_Window.set_fps(fps)
+    end
+
+    def self.real_fps
+      j_Window.get_real_fps()
+    end
+
     def self.width
-      j_Window.getWidth()
+      j_Window.get_width()
     end
     # # Set window width and resize the canvas
     # # Set `nil` to maximize canvas
 
     def self.width=(w)
-      j_Window.setWidth(w)
+      j_Window.set_width(w)
     end
 
     def self.height
-      j_Window.getHeight()
+      j_Window.get_height()
     end
 
     # # Set window height and resize the canvas
     # # Set `nil` to maximize canvas
     def self.height=(h)
-      j_Window.setHeight(h)
+      j_Window.set_height(h)
     end
 
     # @@bgcolor = Constants::Colors::C_BLACK
@@ -76,7 +80,9 @@ module DXJRuby
 
     # def self.draw_pixel(x, y, color, z=0)
 
-    # def self.draw_line(x1, y1, x2, y2, color, z=0)
+    def self.draw_line(x1, y1, x2, y2, color, z=0)
+      j_Window.draw_line(x1, y1, x2, y2, j_color(color), z)
+    end
 
     # def self.draw_box(x1, y1, x2, y2, color, z=0)
 
