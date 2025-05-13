@@ -4,7 +4,7 @@ DXRuby/DXOpal の JRuby 移植です。
 
 ```sh
   # JRuby 処理系のダウンロードなど
-./setup.sh
+./dxjruby setup
 ```
 
 

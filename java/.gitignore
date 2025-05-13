@@ -4,6 +4,7 @@
 /.mvn/
 /mvnw
 /mvnw.cmd
+/mvn_local_repo/
 
 # Eclipse
 

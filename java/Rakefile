@@ -1,5 +1,7 @@
 require "rake/clean"
 
+require_relative "../lib/dxjruby/version"
+
 CLEAN.include "target/"
 
 task :default => :make_jar
@@ -8,7 +10,7 @@ SRC_FILES = Dir.glob("src/**/*").to_a
 SRC_FILES << "pom.xml"
 
 ARTIFACT_ID = "dxjruby"
-JAR_FILE = "target/#{ARTIFACT_ID}-0.0.2.jar"
+JAR_FILE = "target/#{ARTIFACT_ID}-#{DXJRuby::VERSION}.jar"
 
 file JAR_FILE => SRC_FILES do
   sh %( ./build.sh make-jar )

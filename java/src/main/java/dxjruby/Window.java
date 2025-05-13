@@ -4,6 +4,7 @@ import static dxjruby.util.Utils.toInt;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.function.Consumer;
@@ -119,6 +120,33 @@ public class Window {
     }
 
     // --------------------------------
+
+    public static void drawFont(
+            final double x, final double y, final String text,
+            final dxjruby.Font font,
+            // options
+            final int z,
+            final Color color
+            ) {
+        if (text == null) {
+            throw new IllegalArgumentException("text must be non-null");
+        }
+
+        addToDrawQueue(
+                z,
+                g2 -> {
+                    g2.setColor(color);
+
+                    g2.setRenderingHint(
+                            RenderingHints.KEY_TEXT_ANTIALIASING,
+                            RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
+                    final java.awt.Font awtFont = font.getAwtFont();
+                    int fontHeight = g2.getFontMetrics(awtFont).getHeight();
+                    g2.setFont(awtFont);
+                    g2.drawString(text, toInt(x), toInt(y) + fontHeight);
+                });
+    }
 
     public static void drawLine(
             final double x1, final double y1,

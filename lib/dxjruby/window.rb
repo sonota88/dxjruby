@@ -76,7 +76,16 @@ module DXJRuby
 
     # def self.draw_ex(x, y, image, options={})
 
-    # def self.draw_font(x, y, string, font, option={})
+    def self.draw_font(x, y, string, font, option={})
+      z = option[:z] || 0
+      color = option[:color] || [255, 255, 255]
+
+      j_Window.draw_font(
+        x, y, string, font.j_font,
+        # options
+        z, j_color(color)
+      )
+    end
 
     # def self.draw_pixel(x, y, color, z=0)
 

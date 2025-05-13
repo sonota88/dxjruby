@@ -11,7 +11,7 @@ function print_this_dir() {
 }
 
 readonly __DIR__="$(print_this_dir)"
-readonly JRUBY_VER=10.0.0.0
+readonly JRUBY_VER=10.0.0.1
 readonly JRUBY_DIR="${__DIR__}/jruby-${JRUBY_VER}"
 
 function print_help() {
@@ -19,19 +19,55 @@ function print_help() {
 USAGE
     ./dxjruby setup
     ./dxjruby run path/to/main.rb
+
+    ./dxjruby doctor
+    ./dxjruby info list-fonts
 __HELP
 }
 
 function cmd_setup() {
   cd $__DIR__
 
-  wget https://repo1.maven.org/maven2/org/jruby/jruby-dist/${JRUBY_VER}/jruby-dist-${JRUBY_VER}-bin.tar.gz
+  local url=https://repo1.maven.org/maven2/org/jruby/jruby-dist/${JRUBY_VER}/jruby-dist-${JRUBY_VER}-bin.tar.gz
+
+  if which curl; then
+    curl $url -o jruby-dist-${JRUBY_VER}-bin.tar.gz
+  elif which wget; then
+    wget $url
+  else
+    echo "please install wget or curl" >&2
+    exit 1
+  fi
 
   tar xzf jruby-dist-${JRUBY_VER}-bin.tar.gz
   rm jruby-dist-${JRUBY_VER}-bin.tar.gz
 }
 
+function cmd_doctor() {
+  set -o xtrace
+
+  : ---- JAVA_HOME
+  echo $JAVA_HOME
+
+  : ----
+  which java
+
+  : ----
+  java -version
+}
+
+function cmd_info() {
+  ${JRUBY_DIR}/bin/jruby -I "${__DIR__}/lib" \
+    -r dxjruby -e "DXJRuby.info" "$@"
+}
+
 # --------------------------------
+
+. ${__DIR__}/settings.sh
+
+if [ "$JAVA_HOME" != "" ]; then
+  export PATH="${JAVA_HOME}/bin:${PATH}"
+fi
 
 cmd=
 if [ $# -ge 1 ]; then
@@ -41,6 +77,10 @@ fi
 case $cmd in
   setup )
     cmd_setup
+;; doctor )
+     cmd_doctor
+;; info )
+     cmd_info "$@"
 ;; run )
      ${JRUBY_DIR}/bin/jruby -I "${__DIR__}/lib" "$@"
 ;; help | -h | --help )
