@@ -17,6 +17,9 @@ end
 
 module DXJRuby
   include DXJRuby::Constants::Colors
+  # include DXJRuby::Input::KeyCodes
+  include DXJRuby::Input::MouseCodes
+  # include DXJRuby::SoundEffect::WaveTypes
 
   def self.info
     cmd = ARGV.shift

@@ -6,10 +6,27 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import dxjruby.util.DXJRubyException;
 
 public class Font {
+
+    /**
+     * <li>key: CSS generic-family name
+     * <li>value: Java generic-family name
+     * 
+     * <p>https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
+     */
+    public static final Map<String, String> GENERIC_FAMILY_MAP;
+
+    static {
+        GENERIC_FAMILY_MAP = Map.of(
+                "sans-serif", java.awt.Font.SANS_SERIF,
+                "serif", java.awt.Font.SERIF,
+                "monospace", java.awt.Font.MONOSPACED
+                );
+    }
 
     private final String name;
     private final int size;

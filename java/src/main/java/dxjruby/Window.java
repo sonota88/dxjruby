@@ -22,7 +22,6 @@ public class Window {
     private static int width = 640;
     private static int height = 480;
     private static Color bgcolor = new Color(0, 0, 0);
-
     private static MainPanel mainPanel;
     private static FpsManager fpsm;
 
@@ -86,9 +85,7 @@ public class Window {
                 fpsm.delta -= 1.0;
                 fpsm.count += 1;
 
-                // update
-                proc.call(runtime.getCurrentContext(), args);
-                // repaint
+                update(runtime, proc, args);
                 mainPanel.repaintSync();
 
                 {
@@ -105,6 +102,13 @@ public class Window {
                 }
             }
         }
+    }
+
+    private static void update(final Ruby runtime, final RubyProc proc, final IRubyObject[] args) {
+        long tNow = System.nanoTime();
+        Input.prepareMouseState(tNow);
+
+        proc.call(runtime.getCurrentContext(), args);
     }
 
     public static double getFps() {
@@ -175,7 +179,6 @@ public class Window {
 
                     final double x1 = x - r;
                     final double y1 = y - r;
-
                     final int diameter = toInt(r * 2);
 
                     g2.fillOval(toInt(x1), toInt(y1), diameter, diameter);

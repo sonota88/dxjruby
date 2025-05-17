@@ -1,13 +1,13 @@
 module DXJRuby
   module Input
-    # module MouseCodes
-    #   M_LBUTTON = 1
-    #   M_RBUTTON = 2
-    #   M_MBUTTON = 4
-    #   # DXOpal extention
-    #   M_4TH_BUTTON = 8
-    #   M_5TH_BUTTON = 16
-    # end
+    module MouseCodes
+      M_LBUTTON = 1
+      M_RBUTTON = 2
+      M_MBUTTON = 4
+      # # DXOpal extention
+      # M_4TH_BUTTON = 8
+      # M_5TH_BUTTON = 16
+    end
 
     # def self._pressing_keys
 
@@ -53,8 +53,8 @@ module DXJRuby
     # # (internal) initialize mouse events
     # def self._init_mouse_events
 
-    # # Return position of mouse cursor
-    # # (0, 0) is the top-left corner of the canvas
+    # Return position of mouse cursor
+    # (0, 0) is the top-left corner of the canvas
     def self.mouse_x
       j_Input.get_mouse_x()
     end
@@ -67,14 +67,20 @@ module DXJRuby
     #   alias mouse_pos_y mouse_y
     # end
 
-    # # Return true if the mouse button is being pressed
-    # def self.mouse_down?(mouse_code)
+    # Return true if the mouse button is being pressed
+    def self.mouse_down?(mouse_code)
+      j_Input.mouse_down_p(mouse_code)
+    end
 
-    # # Return true if the mouse button is pressed in the last tick
-    # def self.mouse_push?(mouse_code)
+    # Return true if the mouse button is pressed in the last tick
+    def self.mouse_push?(mouse_code)
+      j_Input.mouse_push_p(mouse_code)
+    end
 
-    # # Return true if the mouse button is released in the last tick
-    # def self.mouse_release?(mouse_code)
+    # Return true if the mouse button is released in the last tick
+    def self.mouse_release?(mouse_code)
+      j_Input.mouse_release_p(mouse_code)
+    end
 
     #
     # Touch (unsupported)

@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -24,10 +25,10 @@ class MainPanel extends JPanel {
     public MainPanel(final int winW, final int winH, final Color bgcolor) {
         setBackground(bgcolor);
         setPreferredSize(new Dimension(winW, winH));
+        setFocusable(true);
 
         addMouseMotionListener(new MouseMotionListenerImpl());
-
-        setFocusable(true);
+        addMouseListener(new MouseListenerImpl());
     }
 
     @Override
@@ -78,14 +79,43 @@ class MainPanel extends JPanel {
 
     private static class MouseMotionListenerImpl implements MouseMotionListener {
 
+      @Override
+      public void mouseDragged(final MouseEvent e) {
+          // ignore
+      }
+
+      @Override
+      public void mouseMoved(final MouseEvent e) {
+          Input.setMousePosition(e.getX(), e.getY());
+      }
+
+  }
+
+    private static class MouseListenerImpl implements MouseListener {
+
         @Override
-        public void mouseDragged(final MouseEvent e) {
+        public void mouseClicked(final MouseEvent e) {
             // ignore
         }
 
         @Override
-        public void mouseMoved(final MouseEvent e) {
-            Input.setMousePosition(e.getX(), e.getY());
+        public void mousePressed(final MouseEvent e) {
+            Input.addToMouseEventQueue(e);
+        }
+
+        @Override
+        public void mouseReleased(final MouseEvent e) {
+            Input.addToMouseEventQueue(e);
+        }
+
+        @Override
+        public void mouseEntered(final MouseEvent e) {
+            // ignore
+        }
+
+        @Override
+        public void mouseExited(final MouseEvent e) {
+            // ignore
         }
 
     }

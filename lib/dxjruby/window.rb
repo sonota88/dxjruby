@@ -45,9 +45,10 @@ module DXJRuby
     def self.width
       j_Window.get_width()
     end
-    # # Set window width and resize the canvas
-    # # Set `nil` to maximize canvas
 
+    # Set window width and resize the canvas
+    # Set `nil` to maximize canvas
+    # TODO resize, maximize
     def self.width=(w)
       j_Window.set_width(w)
     end
@@ -56,8 +57,9 @@ module DXJRuby
       j_Window.get_height()
     end
 
-    # # Set window height and resize the canvas
-    # # Set `nil` to maximize canvas
+    # Set window height and resize the canvas
+    # Set `nil` to maximize canvas
+    # TODO resize, maximize
     def self.height=(h)
       j_Window.set_height(h)
     end

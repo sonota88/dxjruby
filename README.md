@@ -1,4 +1,6 @@
 DXRuby/DXOpal の JRuby 移植です。
+まだまだ作りかけです。
+
 
 # Setup
 
