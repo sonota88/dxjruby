@@ -2,9 +2,11 @@ package dxjruby.input;
 
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import dxjruby.Input;
+import dxjruby.input.MouseEventQueue.DXJRubyMouseEvent;
 
 public class InputState {
 
@@ -18,13 +20,26 @@ public class InputState {
         this.mouseReleasedSet = new HashSet<>();
     }
 
-    public void resetMouse() {
+    public void updateMouseState(final List<DXJRubyMouseEvent> evs) {
         // down set ... no need to reset
         this.mousePressedSet.clear();
         this.mouseReleasedSet.clear();
+
+        for (DXJRubyMouseEvent ev : evs) {
+            final MouseEvent awtEvent = ev.awtEvent();
+
+            switch (awtEvent.getID()) {
+            case MouseEvent.MOUSE_PRESSED:
+                mousePressed(awtEvent);
+                break;
+            case MouseEvent.MOUSE_RELEASED:
+                mouseReleased(awtEvent);
+                break;
+            }
+        }
     }
 
-    public void mousePressed(final MouseEvent event) {
+    private void mousePressed(final MouseEvent event) {
         final Integer mouseCode = Integer.valueOf(event.getButton());
 
         final boolean pressed = this.mouseDownSet.contains(mouseCode);
@@ -36,7 +51,7 @@ public class InputState {
         }
     }
 
-    public void mouseReleased(final MouseEvent event) {
+    private void mouseReleased(final MouseEvent event) {
         final Integer mouseCode = Integer.valueOf(event.getButton());
 
         final boolean pressed = this.mouseDownSet.contains(mouseCode);

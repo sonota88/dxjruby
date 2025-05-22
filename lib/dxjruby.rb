@@ -3,6 +3,7 @@ require 'java'
 require 'dxjruby/constants/colors'
 require 'dxjruby/font'
 require 'dxjruby/input'
+require 'dxjruby/sound'
 require 'dxjruby/window'
 require 'dxjruby/version'
 

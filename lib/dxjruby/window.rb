@@ -10,12 +10,69 @@ module DXJRuby
       block.call
     end
 
+    class FpsManager
+      attr_accessor :count
+      attr_accessor :delta
+      attr_accessor :real_fps
+      attr_accessor :span_frame_acc
+      attr_reader :span_per_frame
+
+      def initialize
+        @count = 0
+        @delta = 0.0 # sec
+        @real_fps = nil
+        @span_frame_acc = 0.0 # sec accumurated
+        @fps = 60
+        change_fps(@fps)
+      end
+
+      def change_fps(fps)
+        @fps = fps
+        @real_fps = @fps
+        @span_per_frame = 1.0 / @fps
+      end
+    end
+
+    @@fpsm = FpsManager.new
+
     # Start main loop
     #
     # When called twice, previous loop is stopped (this is useful
     # when implementing interactive game editor, etc.)
     def self.loop(&block)
-      j_Window.start(block)
+      j_Window.start_gui()
+
+      t_base_loop = Time.now
+      t_base_frame = Time.now
+
+      Kernel.loop do
+        t_now = Time.now
+        @@fpsm.delta += (t_now - t_base_loop) / @@fpsm.span_per_frame
+        t_base_loop = t_now
+
+        if @@fpsm.delta > 1.0
+          @@fpsm.delta -= 1.0
+          @@fpsm.count += 1
+
+          j_Window.update_input_state()
+          block.call
+
+          j_Window.repaint()
+
+          t_now = Time.now
+          span_delta = t_now - t_base_frame
+          t_base_frame = t_now
+          @@fpsm.span_frame_acc += span_delta
+
+          if @@fpsm.span_frame_acc >= 1.0
+            @@fpsm.span_frame_acc = 0.0
+            @@fpsm.real_fps = @@fpsm.count
+            @@fpsm.count = 0
+          end
+        end
+      end
+
+      # j_Window.start(block)
     end
 
     # # (DXOpal original) Pause & resume
@@ -35,11 +92,11 @@ module DXJRuby
     # def self.fps
 
     def self.fps=(fps)
-      j_Window.set_fps(fps)
+      @@fpsm.change_fps(fps)
     end
 
     def self.real_fps
-      j_Window.get_real_fps()
+      @@fpsm.real_fps
     end
 
     def self.width

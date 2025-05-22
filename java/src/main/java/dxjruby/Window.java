@@ -11,10 +11,6 @@ import java.util.function.Consumer;
 
 import javax.swing.JFrame;
 
-import org.jruby.Ruby;
-import org.jruby.RubyProc;
-import org.jruby.runtime.builtin.IRubyObject;
-
 import dxjruby.DrawQueue.Command;
 
 public class Window {
@@ -23,18 +19,8 @@ public class Window {
     private static int height = 480;
     private static Color bgcolor = new Color(0, 0, 0);
     private static MainPanel mainPanel;
-    private static FpsManager fpsm;
 
-    static {
-        fpsm = new FpsManager();
-    }
-
-    public static void start(final RubyProc proc) {
-        startGui();
-        startLoop(proc);
-    }
-
-    private static void startGui() {
+    public static void startGui() {
         final JFrame frame = new JFrame();
 
         frame.setLocation(0, 0);
@@ -63,64 +49,13 @@ public class Window {
         });
     }
 
-    /**
-     * Game Loop and Key Input - How to Make a 2D Game in Java #2 - YouTube
-     * https://www.youtube.com/watch?v=VpH33Uw-_0E
-     */
-    private static void startLoop(final RubyProc proc) {
-        final Ruby runtime = proc.getRuntime();
-        final IRubyObject[] args = new IRubyObject[] {};
-
-        long tBaseLoop = System.nanoTime();
-        long tBaseFrame = System.nanoTime();
-
-        while (true) {
-            {
-                final long tNow = System.nanoTime();
-                fpsm.delta += (tNow - tBaseLoop) / fpsm.spanPerFrame;
-                tBaseLoop = tNow;
-            }
-
-            if (fpsm.delta > 1.0) {
-                fpsm.delta -= 1.0;
-                fpsm.count += 1;
-
-                update(runtime, proc, args);
-                mainPanel.repaintSync();
-
-                {
-                    final long tNow = System.nanoTime();
-                    final long spanDelta = tNow - tBaseFrame;
-                    tBaseFrame = tNow;
-                    fpsm.spanAcc += spanDelta;
-                }
-                if (fpsm.spanAcc >= 1_000_000_000) {
-                    fpsm.spanAcc -= 1_000_000_000;
-                    fpsm.realFps = fpsm.count;
-                    fpsm.count = 0;
-                    // Utils.puts("real fps=" + fpsm.realFps);
-                }
-            }
-        }
+    public static void repaint() {
+        mainPanel.repaintSync();
     }
 
-    private static void update(final Ruby runtime, final RubyProc proc, final IRubyObject[] args) {
+    public static void updateInputState() {
         long tNow = System.nanoTime();
-        Input.prepareMouseState(tNow);
-
-        proc.call(runtime.getCurrentContext(), args);
-    }
-
-    public static double getFps() {
-        return fpsm.getFps();
-    }
-
-    public static void setFps(final int fps) {
-        fpsm.changeFps(fps);
-    }
-
-    public static int getRealFps() {
-        return fpsm.realFps;
+        Input.updateMouseState(tNow);
     }
 
     // --------------------------------
@@ -213,34 +148,6 @@ public class Window {
 
     public static void setBgcolor(final Color color) {
         Window.bgcolor = color;
-    }
-
-    // --------------------------------
-
-    private static class FpsManager {
-
-        private int fps = 60;
-        double spanPerFrame;
-        double delta = 0;
-
-        int realFps;
-        int count = 0;
-        long spanAcc = 0; // accumulated
-
-        FpsManager() {
-            changeFps(this.fps);
-        }
-
-        public double getFps() {
-            return this.fps;
-        }
-
-        public void changeFps(final int fps) {
-            this.fps = fps;
-            this.realFps = this.fps;
-            this.spanPerFrame = 1_000_000_000.0 / this.fps;
-        }
-
     }
 
 }

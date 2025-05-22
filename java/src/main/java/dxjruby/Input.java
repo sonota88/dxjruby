@@ -25,22 +25,9 @@ public class Input {
         mouseY = y;
     }
 
-    public static void prepareMouseState(final long t) {
+    public static void updateMouseState(final long t) {
         final List<DXJRubyMouseEvent> evs = mouseEventQueue.takeFrameEvents(t);
-        state.resetMouse();
-
-        for (DXJRubyMouseEvent ev : evs) {
-            final MouseEvent awtEvent = ev.awtEvent();
-
-            switch (awtEvent.getID()) {
-            case MouseEvent.MOUSE_PRESSED:
-                state.mousePressed(awtEvent);
-                break;
-            case MouseEvent.MOUSE_RELEASED:
-                state.mouseReleased(awtEvent);
-                break;
-            }
-        }
+        state.updateMouseState(evs);
     }
 
     public static void addToMouseEventQueue(final MouseEvent ev) {
