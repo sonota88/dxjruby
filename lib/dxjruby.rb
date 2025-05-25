@@ -4,6 +4,7 @@ require 'dxjruby/constants/colors'
 require 'dxjruby/font'
 require 'dxjruby/input'
 require 'dxjruby/sound'
+require 'dxjruby/sound_effect'
 require 'dxjruby/window'
 require 'dxjruby/version'
 
@@ -20,7 +21,7 @@ module DXJRuby
   include DXJRuby::Constants::Colors
   # include DXJRuby::Input::KeyCodes
   include DXJRuby::Input::MouseCodes
-  # include DXJRuby::SoundEffect::WaveTypes
+  include DXJRuby::SoundEffect::WaveTypes
 
   def self.info
     cmd = ARGV.shift

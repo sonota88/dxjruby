@@ -15,4 +15,8 @@ public class DXJRubyException extends RuntimeException {
         super(e);
     }
 
+    public DXJRubyException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
 }
