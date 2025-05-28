@@ -49,13 +49,13 @@ public class Window {
         });
     }
 
-    public static void repaint() {
-        mainPanel.repaintSync();
-    }
-
     public static void updateInputState() {
         long tNow = System.nanoTime();
         Input.updateMouseState(tNow);
+    }
+
+    public static void repaint() {
+        mainPanel.repaintSync();
     }
 
     // --------------------------------

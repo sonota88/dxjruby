@@ -17,12 +17,8 @@ public class Input {
         mouseEventQueue = new MouseEventQueue();
     }
 
-    private static int mouseX = 0;
-    private static int mouseY = 0;
-
     public static void setMousePosition(final int x, final int y) {
-        mouseX = x;
-        mouseY = y;
+        state.setMousePosition(x, y);
     }
 
     public static void updateMouseState(final long t) {
@@ -34,11 +30,11 @@ public class Input {
         mouseEventQueue.add(ev);
     }
 
-    public static boolean mousePushP(int dxrubyMouseCode) {
+    public static boolean mousePushP(final int dxrubyMouseCode) {
         return state.mousePushP(dxrubyMouseCode);
     }
 
-    public static boolean mouseReleaseP(int dxrubyMouseCode) {
+    public static boolean mouseReleaseP(final int dxrubyMouseCode) {
         return state.mouseReleaseP(dxrubyMouseCode);
     }
 
@@ -47,7 +43,7 @@ public class Input {
     }
 
     @SuppressWarnings("boxing")
-    public static int toAwtMouseButton(int dxrubyMouseCode) {
+    public static int toAwtMouseButton(final int dxrubyMouseCode) {
         switch (dxrubyMouseCode) {
         case DXJRubyMouseCode.M_LBUTTON:
             return MouseEvent.BUTTON1;
@@ -64,11 +60,11 @@ public class Input {
     // --------------------------------
 
     public static int getMouseX() {
-        return mouseX;
+        return state.getMouseX();
     }
 
     public static int getMouseY() {
-        return mouseY;
+        return state.getMouseY();
     }
 
     // --------------------------------

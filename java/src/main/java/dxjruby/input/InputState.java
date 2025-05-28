@@ -10,6 +10,9 @@ import dxjruby.input.MouseEventQueue.DXJRubyMouseEvent;
 
 public class InputState {
 
+    private static int mouseX = 0;
+    private static int mouseY = 0;
+
     private final Set<Integer> mouseDownSet;
     private final Set<Integer> mousePressedSet;
     private final Set<Integer> mouseReleasedSet;
@@ -18,6 +21,11 @@ public class InputState {
         this.mouseDownSet = new HashSet<>();
         this.mousePressedSet = new HashSet<>();
         this.mouseReleasedSet = new HashSet<>();
+    }
+
+    public void setMousePosition(final int x, final int y) {
+        mouseX = x;
+        mouseY = y;
     }
 
     public void updateMouseState(final List<DXJRubyMouseEvent> evs) {
@@ -30,16 +38,16 @@ public class InputState {
 
             switch (awtEvent.getID()) {
             case MouseEvent.MOUSE_PRESSED:
-                mousePressed(awtEvent);
+                onMousePressed(awtEvent);
                 break;
             case MouseEvent.MOUSE_RELEASED:
-                mouseReleased(awtEvent);
+                onMouseReleased(awtEvent);
                 break;
             }
         }
     }
 
-    private void mousePressed(final MouseEvent event) {
+    private void onMousePressed(final MouseEvent event) {
         final Integer mouseCode = Integer.valueOf(event.getButton());
 
         final boolean pressed = this.mouseDownSet.contains(mouseCode);
@@ -51,7 +59,7 @@ public class InputState {
         }
     }
 
-    private void mouseReleased(final MouseEvent event) {
+    private void onMouseReleased(final MouseEvent event) {
         final Integer mouseCode = Integer.valueOf(event.getButton());
 
         final boolean pressed = this.mouseDownSet.contains(mouseCode);
@@ -82,6 +90,16 @@ public class InputState {
 
         return this.mouseDownSet.contains(
                 Integer.valueOf(awtButton));
+    }
+
+    // --------------------------------
+
+    public int getMouseX() {
+        return mouseX;
+    }
+
+    public int getMouseY() {
+        return mouseY;
     }
 
 }
