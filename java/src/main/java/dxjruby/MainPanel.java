@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -27,13 +29,14 @@ class MainPanel extends JPanel {
         setPreferredSize(new Dimension(winW, winH));
         setFocusable(true);
 
+        addKeyListener(new KeyListenerImpl());
         addMouseMotionListener(new MouseMotionListenerImpl());
         addMouseListener(new MouseListenerImpl());
     }
 
     @Override
     public void paintComponent(final Graphics g) {
-        final DrawQueue drawQueue = DrawQueue.getInstance();
+        final DrawQueue drawQueue = DrawQueue.takeSnapshot();
         final List<Integer> sortedZs = drawQueue.getSortedZList();
 
         super.paintComponent(g);
@@ -46,7 +49,6 @@ class MainPanel extends JPanel {
         }
         g2.dispose();
 
-        drawQueue.clear();
         painting = false;
     }
 
@@ -76,6 +78,25 @@ class MainPanel extends JPanel {
     }
 
     // --------------------------------
+
+    private static class KeyListenerImpl implements KeyListener {
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+            // ignore
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            Input.addToKeyEventQueue(e);
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            Input.addToKeyEventQueue(e);
+        }
+
+    }
 
     private static class MouseMotionListenerImpl implements MouseMotionListener {
 

@@ -3,6 +3,7 @@ require 'java'
 require 'dxjruby/constants/colors'
 require 'dxjruby/font'
 require 'dxjruby/input'
+require 'dxjruby/input/key_codes'
 require 'dxjruby/sound'
 require 'dxjruby/sound_effect'
 require 'dxjruby/window'
@@ -17,9 +18,11 @@ else
           )
 end
 
+DXJRuby::Input::KeyCodes.init
+
 module DXJRuby
   include DXJRuby::Constants::Colors
-  # include DXJRuby::Input::KeyCodes
+  include DXJRuby::Input::KeyCodes
   include DXJRuby::Input::MouseCodes
   include DXJRuby::SoundEffect::WaveTypes
 

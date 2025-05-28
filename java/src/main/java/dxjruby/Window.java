@@ -52,6 +52,7 @@ public class Window {
     public static void updateInputState() {
         long tNow = System.nanoTime();
         Input.updateMouseState(tNow);
+        Input.updateKeyState(tNow);
     }
 
     public static void repaint() {

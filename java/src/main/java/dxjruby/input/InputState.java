@@ -1,11 +1,13 @@
 package dxjruby.input;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import dxjruby.Input;
+import dxjruby.input.KeyEventQueue.DXJRubyKeyEvent;
 import dxjruby.input.MouseEventQueue.DXJRubyMouseEvent;
 
 public class InputState {
@@ -13,11 +15,19 @@ public class InputState {
     private static int mouseX = 0;
     private static int mouseY = 0;
 
+    private final Set<Integer> keyDownSet;
+    private final Set<Integer> keyPressedSet;
+    private final Set<Integer> keyReleasedSet;
+
     private final Set<Integer> mouseDownSet;
     private final Set<Integer> mousePressedSet;
     private final Set<Integer> mouseReleasedSet;
 
     public InputState() {
+        this.keyDownSet = new HashSet<>();
+        this.keyPressedSet = new HashSet<>();
+        this.keyReleasedSet = new HashSet<>();
+
         this.mouseDownSet = new HashSet<>();
         this.mousePressedSet = new HashSet<>();
         this.mouseReleasedSet = new HashSet<>();
@@ -27,6 +37,76 @@ public class InputState {
         mouseX = x;
         mouseY = y;
     }
+
+    // --------------------------------
+    // keyboard
+
+    public void updateKeyState(final List<DXJRubyKeyEvent> evs) {
+        // down set ... no need to reset
+        this.keyPressedSet.clear();
+        this.keyReleasedSet.clear();
+
+        for (DXJRubyKeyEvent ev : evs) {
+            final KeyEvent awtEvent = ev.awtEvent();
+
+            switch (awtEvent.getID()) {
+            case KeyEvent.KEY_PRESSED:
+                onKeyPressed(awtEvent);
+                break;
+            case KeyEvent.KEY_RELEASED:
+                onKeyReleased(awtEvent);
+                break;
+            }
+        }
+    }
+
+    private void onKeyPressed(final KeyEvent event) {
+        final Integer keyCode = Integer.valueOf(event.getKeyCode());
+
+        final boolean pressed = this.keyDownSet.contains(keyCode);
+        if (pressed) {
+            // no change
+        } else {
+            this.keyDownSet.add(keyCode);
+            this.keyPressedSet.add(keyCode);
+        }
+    }
+
+    private void onKeyReleased(final KeyEvent event) {
+        final Integer keyCode = Integer.valueOf(event.getKeyCode());
+
+        final boolean pressed = this.keyDownSet.contains(keyCode);
+        if (pressed) {
+            this.keyDownSet.remove(keyCode);
+            this.keyReleasedSet.add(keyCode);
+        } else {
+            // no change
+        }
+    }
+
+    public boolean keyPushP(final int dxrubyKeyCode) {
+        final int awtKeyCode = KeyCodeMap.toAwtKeyCode(dxrubyKeyCode);
+
+        return this.keyPressedSet.contains(
+                Integer.valueOf(awtKeyCode));
+    }
+
+    public boolean keyReleaseP(final int dxrubyKeyCode) {
+        final int awtKeyCode = KeyCodeMap.toAwtKeyCode(dxrubyKeyCode);
+
+        return this.keyReleasedSet.contains(
+                Integer.valueOf(awtKeyCode));
+    }
+
+    public boolean keyDownP(final int dxrubyKeyCode) {
+        final int awtKeyCode = KeyCodeMap.toAwtKeyCode(dxrubyKeyCode);
+
+        return this.keyDownSet.contains(
+                Integer.valueOf(awtKeyCode));
+    }
+
+    // --------------------------------
+    // mouse
 
     public void updateMouseState(final List<DXJRubyMouseEvent> evs) {
         // down set ... no need to reset

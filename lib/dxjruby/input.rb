@@ -27,14 +27,20 @@ module DXJRuby
     # # Keyboard
     # #
 
-    # # Return true if the key is being pressed
-    # def self.key_down?(code)
+    # Return true if the key is being pressed
+    def self.key_down?(code)
+      j_Input.key_down_p(code.value)
+    end
 
-    # # Return true if the key is just pressed
-    # def self.key_push?(code)
+    # Return true if the key is just pressed
+    def self.key_push?(code)
+      j_Input.key_push_p(code.value)
+    end
 
-    # # Return true if the key is just released
-    # def self.key_release?(code)
+    # Return true if the key is just released
+    def self.key_release?(code)
+      j_Input.key_release_p(code.value)
+    end
 
     # # Set DOM element to receive keydown/keyup event
     # #
