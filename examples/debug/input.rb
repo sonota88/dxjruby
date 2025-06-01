@@ -35,6 +35,7 @@ m_release_y = 0
 dy = 2
 
 fps_hist = []
+fps_timer = 0
 
 Window.load_resources do
   Window.loop do
@@ -69,13 +70,17 @@ Window.load_resources do
       m_release_y = 0
     end
 
-    fps_hist << Window.real_fps
-    if fps_hist.size > 100
-      fps_hist = fps_hist[-100..-1]
+    fps_timer += 1
+    if fps_timer >= 50
+      fps_timer = 0
+      fps_hist << Window.real_fps
+      if fps_hist.size > 100
+        fps_hist.shift
+      end
     end
 
     # 負荷をかける
-    5000.times do
+    2000.times do
       x = 200 + rand(440)
       y = rand(480)
       Window.draw_circle_fill(

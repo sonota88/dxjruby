@@ -11,11 +11,11 @@ import java.util.function.Consumer;
 public class DrawQueue {
 
     private static DrawQueue instance;
-    // private static final Object lock;
+    private static final Object lock;
 
     static {
         instance = new DrawQueue();
-        // lock = new Object();
+        lock = new Object();
     }
 
     /** key: z */
@@ -32,14 +32,12 @@ public class DrawQueue {
     private void _add(final int z, final Command command) {
         final Integer z2 = Integer.valueOf(z);
 
-        // synchronized (lock) { // maybe required
-
-        if (!map.containsKey(z2)) {
-            map.put(z2, new ArrayList<>());
+        synchronized (lock) {
+            if (!map.containsKey(z2)) {
+                map.put(z2, new ArrayList<>());
+            }
+            map.get(z2).add(command);
         }
-        map.get(z2).add(command);
-
-        // } // end synchronized
     }
 
     public static void add(final int z, final Command command) {
@@ -59,12 +57,10 @@ public class DrawQueue {
     public static DrawQueue takeSnapshot() {
         final DrawQueue snapshot;
 
-        // synchronized (lock) { // maybe required
-
-        snapshot = instance;
-        instance = new DrawQueue();
-
-        // } // end synchronized
+        synchronized (lock) {
+            snapshot = instance;
+            instance = new DrawQueue();
+        }
 
         return snapshot;
     }

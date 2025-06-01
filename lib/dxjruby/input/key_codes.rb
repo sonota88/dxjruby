@@ -15,7 +15,7 @@ module DXJRuby
       # columns: rb_const_name, dxopal_code, awt_const_name
       # TODO: add event.code for those commented out (pull request welcome)
       CONFIG = [
-        # K_ESCAPE = 'Escape'
+        "K_ESCAPE  Escape  VK_ESCAPE",
         "K_1  Digit1  VK_1",
         "K_2  Digit2  VK_2",
         "K_3  Digit3  VK_3",
@@ -29,7 +29,7 @@ module DXJRuby
         # K_MINUS = 'Minus'
         # K_EQUALS = 'Equal'
         # K_BACK = 'Backspace'
-        # K_TAB = 'Tab'
+        "K_TAB  Tab  VK_TAB",
         "K_Q  KeyQ  VK_Q",
         "K_W  KeyW  VK_W",
         "K_E  KeyE  VK_E",
@@ -42,9 +42,9 @@ module DXJRuby
         "K_P  KeyP  VK_P",
         # K_LBRACKET = 'BracketLeft'
         # K_RBRACKET = 'BracketRight'
-        # K_RETURN = 'Enter'
-        # K_ENTER = 'Enter'  # Alias; not in DXRuby
-        # K_LCONTROL = 'ControlLeft'
+        "K_RETURN  Enter  VK_ENTER",
+        "K_ENTER   Enter  VK_ENTER", # Alias; not in DXRuby
+        "K_LCONTROL  ControlLeft  VK_CONTROL",
         "K_A  KeyA  VK_A",
         "K_S  KeyS  VK_S",
         "K_D  KeyD  VK_D",
@@ -72,18 +72,18 @@ module DXJRuby
         # K_RSHIFT = 'ShiftRight'
         # K_MULTIPLY = "NumpadMultiply"
         # #K_LMENU Alt
-        # K_SPACE = 'Space'
+        "K_SPACE  Space  VK_SPACE",
         # #K_CAPITAL
-        # K_F1  = "F1"
-        # K_F2  = "F2"
-        # K_F3  = "F3"
-        # K_F4  = "F4"
-        # K_F5  = "F5"
-        # K_F6  = "F6"
-        # K_F7  = "F7"
-        # K_F8  = "F8"
-        # K_F9  = "F9"
-        # K_F10 = "F10"
+        "K_F1   F1   VK_F1",
+        "K_F2   F2   VK_F2",
+        "K_F3   F3   VK_F3",
+        "K_F4   F4   VK_F4",
+        "K_F5   F5   VK_F5",
+        "K_F6   F6   VK_F6",
+        "K_F7   F7   VK_F7",
+        "K_F8   F8   VK_F8",
+        "K_F9   F9   VK_F9",
+        "K_F10  F10  VK_F10",
         # K_NUMLOCK = "NumLock"
         # K_SCROLL = "ScrollLock"
         # K_NUMPAD7 = "Numpad7"
@@ -100,11 +100,11 @@ module DXJRuby
         # K_NUMPAD0 = "Numpad0"
         # K_DECIMAL = "NumpadDecimal"
         # #K_OEM_102 
-        # K_F11 = "F11"
-        # K_F12 = "F12"
-        # K_F13 = "F13"
-        # K_F14 = "F14"
-        # K_F15 = "F15"
+        "K_F11  F11  VK_F11",
+        "K_F12  F12  VK_F12",
+        "K_F13  F13  VK_F13",
+        "K_F14  F14  VK_F14",
+        "K_F15  F15  VK_F15",
         # K_KANA = "KanaMode"
         # #K_ABNT_C1 
         # K_CONVERT = "Convert"
@@ -122,7 +122,7 @@ module DXJRuby
         # #K_UNLABELED
         # #K_NEXTTRACK
         # K_NUMPADENTER = "NumpadEnter"
-        # K_RCONTROL = 'ControlRight'
+        "K_RCONTROL  ControlRight  VK_CONTROL",
         # K_MUTE = "VolumeMute"
         # #K_CALCULATOR
         # #K_PLAYPAUSE
@@ -136,12 +136,12 @@ module DXJRuby
         # #K_RMENU Alt
         # K_PAUSE = "Pause"
         # K_HOME = "Home"
-        # K_UP = 'ArrowUp'
+        "K_UP     ArrowUp     VK_UP",
         # #K_PRIOR
-        # K_LEFT = 'ArrowLeft'
-        # K_RIGHT = 'ArrowRight'
+        "K_LEFT   ArrowLeft   VK_LEFT",
+        "K_RIGHT  ArrowRight  VK_RIGHT",
         # K_END = "End"
-        # K_DOWN = 'ArrowDown'
+        "K_DOWN   ArrowDown   VK_DOWN",
         # #K_NEXT
         # K_INSERT = "Insert"
         # K_DELETE = "Delete"

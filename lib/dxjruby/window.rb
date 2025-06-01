@@ -136,6 +136,10 @@ module DXJRuby
     # def self.draw_ex(x, y, image, options={})
 
     def self.draw_font(x, y, string, font, option={})
+      if string.nil?
+        raise TypeError.new("wrong argument type nil (expected String)")
+      end
+
       z = option[:z] || 0
       color = option[:color] || [255, 255, 255]
 
@@ -152,11 +156,17 @@ module DXJRuby
       j_Window.draw_line(x1, y1, x2, y2, j_color(color), z)
     end
 
-    # def self.draw_box(x1, y1, x2, y2, color, z=0)
+    def self.draw_box(x1, y1, x2, y2, color, z=0)
+      j_Window.draw_box(x1, y1, x2, y2, j_color(color), z)
+    end
 
-    # def self.draw_box_fill(x1, y1, x2, y2, color, z=0)
+    def self.draw_box_fill(x1, y1, x2, y2, color, z=0)
+      j_Window.draw_box_fill(x1, y1, x2, y2, j_color(color), z)
+    end
 
-    # def self.draw_circle(x, y, r, color, z=0)
+    def self.draw_circle(x, y, r, color, z=0)
+      j_Window.draw_circle(x, y, r, j_color(color), z)
+    end
 
     def self.draw_circle_fill(x, y, r, color, z=0)
       j_Window.draw_circle_fill(x, y, r, j_color(color), z)

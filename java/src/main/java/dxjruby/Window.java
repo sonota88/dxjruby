@@ -50,7 +50,7 @@ public class Window {
     }
 
     public static void updateInputState() {
-        long tNow = System.nanoTime();
+        final long tNow = System.nanoTime();
         Input.updateMouseState(tNow);
         Input.updateKeyState(tNow);
     }
@@ -68,10 +68,6 @@ public class Window {
             final int z,
             final Color color
             ) {
-        if (text == null) {
-            throw new IllegalArgumentException("text must be non-null");
-        }
-
         addToDrawQueue(
                 z,
                 g2 -> {
@@ -97,10 +93,70 @@ public class Window {
                 z,
                 g2 -> {
                     g2.setColor(c);
+                    enableAntiAlias(g2);
+
                     g2.drawLine(
                             toInt(x1), toInt(y1),
                             toInt(x2), toInt(y2)
                             );
+                });
+    }
+
+    public static void drawBox(
+            final double x1,
+            final double y1,
+            final double x2,
+            final double y2,
+            final Color color,
+            final int z
+            ) {
+        addToDrawQueue(
+                z,
+                g2 -> {
+                    g2.setColor(color);
+                    enableAntiAlias(g2);
+
+                    final double width = x2 - x1;
+                    final double height = y2 - y1;
+                    g2.drawRect(toInt(x1), toInt(y1), toInt(width), toInt(height));
+                });
+    }
+
+    public static void drawBoxFill(
+            final double x1,
+            final double y1,
+            final double x2,
+            final double y2,
+            final Color color,
+            final int z
+            ) {
+        addToDrawQueue(
+                z,
+                g2 -> {
+                    g2.setColor(color);
+                    enableAntiAlias(g2);
+
+                    final double width = x2 - x1;
+                    final double height = y2 - y1;
+                    g2.fillRect(toInt(x1), toInt(y1), toInt(width), toInt(height));
+                });
+    }
+
+    public static void drawCircle(
+            final double x, final double y, final double r,
+            final Color c, final int z
+            ) {
+        addToDrawQueue(
+                z,
+                g2 -> {
+                    g2.setColor(c);
+                    enableAntiAlias(g2);
+
+                    final double x1 = x - r;
+                    final double y1 = y - r;
+                    final int diameter = toInt(r * 2);
+
+                    g2.drawOval(toInt(x1), toInt(y1), diameter, diameter);
                 });
     }
 
@@ -112,6 +168,7 @@ public class Window {
                 z,
                 g2 -> {
                     g2.setColor(c);
+                    enableAntiAlias(g2);
 
                     final double x1 = x - r;
                     final double y1 = y - r;
@@ -119,6 +176,13 @@ public class Window {
 
                     g2.fillOval(toInt(x1), toInt(y1), diameter, diameter);
                 });
+    }
+
+    private static void enableAntiAlias(final Graphics2D g2) {
+        g2.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON
+        );
     }
 
     private static void addToDrawQueue(final int z, final Consumer<Graphics2D> func) {

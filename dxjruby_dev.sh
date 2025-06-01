@@ -6,7 +6,7 @@ set -o errexit
 readonly __DIR__="$( cd "$(dirname "$0")"; pwd )"
 
 (
-  cd java
+  cd ${__DIR__}/java
   rake make_jar
 )
 

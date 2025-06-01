@@ -27,41 +27,43 @@ WAVE_TYPES = [
 # 以下は SoundEffect のチュートリアルで紹介されている例です
 # https://mirichi.github.io/dxruby-doc/tutorial/soundeffect.html
 
+SE_VOLUME = 0.3
+
 scope {
-  v = 50.0
+  v = 100.0
   c = 60
   f = 1300
   SoundEffect.register(:se1, 500) do
     c = c - 1
     if c < 0 then
-      v = v - 0.1
+      v = v - 0.2
       f = 1760
     end
-    [f, v]
+    [f, v * SE_VOLUME]
   end
 }
 
 scope {
   SoundEffect.register(:se2, 1000, WAVE_TRI) do # 低音は三角波
-    [110, 40]
+    [110, 80 * SE_VOLUME]
   end
 
   # TODO
   # s2.add(WAVE_RECT) do # 矩形波
-  #   [275, 20]
+  #   [275, 40 * SE_VOLUME]
   # end
   # s2.add(WAVE_RECT) do # 矩形波
-  #   [330, 20]
+  #   [330, 40 * SE_VOLUME]
   # end
 }
 
 scope {
   f = 0
-  v = 75.0
+  v = 150.0
   SoundEffect.register(:se3, 500, WAVE_SIN) do
     f = f + 1
     v = v - 0.1
-    [880 + Math.sin(f) * 200, v]
+    [880 + Math.sin(f) * 200, v * SE_VOLUME]
   end
 }
 

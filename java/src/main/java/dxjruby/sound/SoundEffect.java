@@ -1,8 +1,8 @@
 package dxjruby.sound;
 
-import javax.sound.sampled.AudioFormat;
+import java.util.List;
 
-import org.jruby.RubyArray;
+import javax.sound.sampled.AudioFormat;
 
 public class SoundEffect extends SoundBase {
 
@@ -14,13 +14,13 @@ public class SoundEffect extends SoundBase {
             /* big endian */ false
       );
 
-    public SoundEffect(final RubyArray<?> rbSamples) {
+    public SoundEffect(final List<Double> rbSamples) {
         final AudioData audioData = createAudioData(rbSamples);
 
         init(audioData);
     }
 
-    private AudioData createAudioData(final RubyArray<?> rbSamples) {
+    private AudioData createAudioData(final List<Double> rbSamples) {
         final byte[] samples = new byte[rbSamples.size() * 2];
 
         final double full = Math.pow(2, 16) - 1;
@@ -28,8 +28,7 @@ public class SoundEffect extends SoundBase {
 
         for (int i = 0; i < rbSamples.size(); i++) {
             final int i2 = i * 2;
-            @SuppressWarnings("boxing")
-            final double val = (double) rbSamples.get(i);
+            final double val = rbSamples.get(i).doubleValue();
 
             final int intvalH =
                     Double.valueOf(

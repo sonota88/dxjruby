@@ -1,6 +1,6 @@
 package dxjruby;
 
-import org.jruby.RubyArray;
+import java.util.List;
 
 import dxjruby.sound.FileSound;
 import dxjruby.sound.SoundEffect;
@@ -16,7 +16,7 @@ public class Sound {
     }
 
     public static SoundEffect createSoundEffect(
-            final RubyArray<?> rbSamples
+            final List<Double> rbSamples
             ) {
         return new SoundEffect(rbSamples);
     }
