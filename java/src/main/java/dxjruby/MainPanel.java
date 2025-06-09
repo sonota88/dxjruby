@@ -11,13 +11,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JPanel;
 
 import dxjruby.DXJRuby.OsType;
 import dxjruby.DrawQueue.Command;
-import dxjruby.util.DXJRubyException;
 
 @SuppressWarnings("serial")
 class MainPanel extends JPanel {
@@ -28,6 +26,7 @@ class MainPanel extends JPanel {
         setBackground(bgcolor);
         setPreferredSize(new Dimension(winW, winH));
         setFocusable(true);
+        setOpaque(false);
 
         addKeyListener(new KeyListenerImpl());
         addMouseMotionListener(new MouseMotionListenerImpl());
@@ -41,6 +40,10 @@ class MainPanel extends JPanel {
 
         super.paintComponent(g);
         final Graphics2D g2 = (Graphics2D) g;
+
+        g2.setColor(Window.getBgcolor());
+        g2.fillRect(0, 0, Window.getWidth(), Window.getHeight());
+
         for (Integer z : sortedZs) {
             final List<Command> cmds = drawQueue.getCommands(z);
             for (Command cmd : cmds) {
@@ -52,7 +55,12 @@ class MainPanel extends JPanel {
         painting = false;
     }
 
-    void repaintSync() {
+    void requestPaint() {
+        if (painting) {
+            // skip painting
+            DrawQueue.takeSnapshot();
+            return;
+        }
         painting = true;
 
         repaint();
@@ -66,14 +74,6 @@ class MainPanel extends JPanel {
              * https://stackoverflow.com/questions/46580889/make-my-java-swing-animation-smoother-in-linux
              */
             Toolkit.getDefaultToolkit().sync();
-        }
-
-        try {
-            while (painting) {
-                TimeUnit.NANOSECONDS.sleep(100);
-            }
-        } catch (InterruptedException e) {
-            throw new DXJRubyException(e);
         }
     }
 

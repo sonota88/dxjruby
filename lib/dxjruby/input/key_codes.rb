@@ -28,7 +28,7 @@ module DXJRuby
         "K_0  Digit0  VK_0",
         # K_MINUS = 'Minus'
         # K_EQUALS = 'Equal'
-        # K_BACK = 'Backspace'
+        "K_BACK  Backspace  VK_BACK_SPACE",
         "K_TAB  Tab  VK_TAB",
         "K_Q  KeyQ  VK_Q",
         "K_W  KeyW  VK_W",
@@ -57,7 +57,7 @@ module DXJRuby
         # K_SEMICOLON = 'Semicolon'
         # K_APOSTROPHE = 'Quote'  # '
         # K_GRAVE = "Backquote"   # `
-        # K_LSHIFT = 'ShiftLeft'
+        "K_LSHIFT  ShiftLeft  VK_SHIFT",
         # K_BACKSLASH = 'BackSlash'  # Note: different to K_YEN
         "K_Z  KeyZ  VK_Z",
         "K_X  KeyX  VK_X",
@@ -69,7 +69,7 @@ module DXJRuby
         # K_COMMA = 'Comma'
         # K_PERIOD = 'Period'
         # K_SLASH = 'Slash'
-        # K_RSHIFT = 'ShiftRight'
+        "K_RSHIFT  ShiftRight  VK_SHIFT",
         # K_MULTIPLY = "NumpadMultiply"
         # #K_LMENU Alt
         "K_SPACE  Space  VK_SPACE",
@@ -86,18 +86,18 @@ module DXJRuby
         "K_F10  F10  VK_F10",
         # K_NUMLOCK = "NumLock"
         # K_SCROLL = "ScrollLock"
-        # K_NUMPAD7 = "Numpad7"
-        # K_NUMPAD8 = "Numpad8"
-        # K_NUMPAD9 = "Numpad9"
+        "K_NUMPAD7  Numpad7  VK_NUMPAD7",
+        "K_NUMPAD8  Numpad8  VK_NUMPAD8",
+        "K_NUMPAD9  Numpad9  VK_NUMPAD9",
         # K_SUBTRACT = "NumpadSubtract"
-        # K_NUMPAD4 = "Numpad4"
-        # K_NUMPAD5 = "Numpad5"
-        # K_NUMPAD6 = "Numpad6"
+        "K_NUMPAD4  Numpad4  VK_NUMPAD4",
+        "K_NUMPAD5  Numpad5  VK_NUMPAD5",
+        "K_NUMPAD6  Numpad6  VK_NUMPAD6",
         # K_ADD = "NumpadAdd"
-        # K_NUMPAD1 = "Numpad1"
-        # K_NUMPAD2 = "Numpad2"
-        # K_NUMPAD3 = "Numpad3"
-        # K_NUMPAD0 = "Numpad0"
+        "K_NUMPAD1  Numpad1  VK_NUMPAD1",
+        "K_NUMPAD2  Numpad2  VK_NUMPAD2",
+        "K_NUMPAD3  Numpad3  VK_NUMPAD3",
+        "K_NUMPAD0  Numpad0  VK_NUMPAD0",
         # K_DECIMAL = "NumpadDecimal"
         # #K_OEM_102 
         "K_F11  F11  VK_F11",
@@ -162,18 +162,18 @@ module DXJRuby
         # #K_MEDIASELECT
         # K_BACKSPACE = 'Backspace'
         # K_NUMPADSTAR = "NumpadMultiply"
-        # K_LALT = "AltLeft"
+        "K_LALT  AltLeft  VK_ALT",
         # K_CAPSLOCK = 'CapsLock'
         # K_NUMPADMINUS = "NumpadSubtract"
         # K_NUMPADPLUS = "NumpadAdd"
         # K_NUMPADPERIOD = "NumpadDecimal"
         # K_NUMPADSLASH = "NumpadDivide"
-        # K_RALT = "AltRight"
-        # K_UPARROW = 'ArrowUp'
+        "K_RALT  AltRight  VK_ALT",
+        "K_UPARROW  ArrowUp  VK_UP",
         # K_PGUP = "PageUp"
-        # K_LEFTARROW = 'ArrowLeft'
-        # K_RIGHTARROW = 'ArrowRight'
-        # K_DOWNARROW = 'ArrowDown'
+        "K_LEFTARROW  ArrowLeft  VK_LEFT",
+        "K_RIGHTARROW  ArrowRight  VK_RIGHT",
+        "K_DOWNARROW  ArrowDown  VK_DOWN",
         # K_PGDN = "PageDown"
       ]
 

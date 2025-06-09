@@ -40,6 +40,7 @@ module DXJRuby
     # When called twice, previous loop is stopped (this is useful
     # when implementing interactive game editor, etc.)
     def self.loop(&block)
+      j_Window.set_caption("DXJRubyApplication")
       j_Window.start_gui()
 
       t_base_loop = Time.now
@@ -71,8 +72,6 @@ module DXJRuby
           end
         end
       end
-
-      # j_Window.start(block)
     end
 
     # # (DXOpal original) Pause & resume
@@ -136,8 +135,8 @@ module DXJRuby
     # def self.draw_ex(x, y, image, options={})
 
     def self.draw_font(x, y, string, font, option={})
-      if string.nil?
-        raise TypeError.new("wrong argument type nil (expected String)")
+      unless string.is_a?(String)
+        raise TypeError.new("wrong argument type #{string.class} (expected String)")
       end
 
       z = option[:z] || 0
@@ -178,6 +177,22 @@ module DXJRuby
 
     # # (internal)
     # def self.enqueue_draw(z, *args)
+
+    #
+    # DXRuby
+    #
+
+    def self.caption
+      j_Window.get_caption()
+    end
+
+    def self.caption=(title)
+      unless title.is_a?(String)
+        raise TypeError.new("wrong argument type #{title.class} (expected String)")
+      end
+
+      j_Window.set_caption(title)
+    end
 
     private
 

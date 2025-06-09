@@ -19,14 +19,16 @@ public class Window {
     private static int height = 480;
     private static Color bgcolor = new Color(0, 0, 0);
     private static MainPanel mainPanel;
+    private static final JFrame frame;
+
+    static {
+        frame = new JFrame();
+    }
 
     public static void startGui() {
-        final JFrame frame = new JFrame();
-
         frame.setLocation(0, 0);
 
         frame.setResizable(false);
-        frame.setTitle("DXJRuby window title");
         setCloseOperation(frame);
 
         mainPanel = new MainPanel(
@@ -56,7 +58,15 @@ public class Window {
     }
 
     public static void repaint() {
-        mainPanel.repaintSync();
+        mainPanel.requestPaint();
+    }
+
+    public static String getCaption() {
+        return frame.getTitle();
+    }
+
+    public static void setCaption(final String caption) {
+        frame.setTitle(caption);
     }
 
     // --------------------------------
@@ -178,11 +188,20 @@ public class Window {
                 });
     }
 
+    /**
+     * <pre>
+     * antialias
+     * DXRuby: disabled
+     * DXOpal: enabled
+     * </pre>
+     */
     private static void enableAntiAlias(final Graphics2D g2) {
+        /*
         g2.setRenderingHint(
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON
         );
+        */
     }
 
     private static void addToDrawQueue(final int z, final Consumer<Graphics2D> func) {
