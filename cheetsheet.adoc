@@ -1,6 +1,6 @@
 :toc:
 
-== Basic
+== テンプレート
 
 [source,ruby]
 --------------------------------
@@ -18,7 +18,10 @@ Window.load_resources do
 end
 --------------------------------
 
-== Window
+
+== API
+
+=== Window
 
 [source,ruby]
 --------------------------------
@@ -50,3 +53,12 @@ Window.draw_circle(
   z  # optional
 )
 --------------------------------
+
+
+== 参考
+
+DXRuby 1.4.6 リファレンスマニュアル +
+https://mirichi.github.io/dxruby-doc/index.html
+
+dxopal/lib/dxopal at main · yhara/dxopal +
+https://github.com/yhara/dxopal/tree/main/lib/dxopal
