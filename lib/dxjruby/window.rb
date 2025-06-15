@@ -16,6 +16,7 @@ module DXJRuby
       attr_accessor :real_fps
       attr_accessor :span_frame_acc
       attr_reader :span_per_frame
+      attr_reader :fps
 
       def initialize
         @count = 0
@@ -88,7 +89,9 @@ module DXJRuby
     # # Return internal DXOpal::Image object (for experimental/hacking use)
     # def self._img
 
-    # def self.fps
+    def self.fps
+      @@fpsm.fps
+    end
 
     def self.fps=(fps)
       @@fpsm.change_fps(fps)
@@ -126,7 +129,9 @@ module DXJRuby
       j_Window.set_bgcolor(j_color(col))
     end
 
-    # def self.draw(x, y, image, z=0)
+    def self.draw(x, y, image, z=0)
+      j_Window.draw_image(x, y, image.to_j, z)
+    end
 
     # def self.draw_scale(x, y, image, scale_x, scale_y, center_x=nil, center_y=nil, z=0)
 

@@ -135,16 +135,16 @@ module DXJRuby
         # #K_SYSRQ
         # #K_RMENU Alt
         # K_PAUSE = "Pause"
-        # K_HOME = "Home"
+        "K_HOME  Home  VK_HOME",
         "K_UP     ArrowUp     VK_UP",
         # #K_PRIOR
         "K_LEFT   ArrowLeft   VK_LEFT",
         "K_RIGHT  ArrowRight  VK_RIGHT",
-        # K_END = "End"
+        "K_END  End  VK_END",
         "K_DOWN   ArrowDown   VK_DOWN",
         # #K_NEXT
-        # K_INSERT = "Insert"
-        # K_DELETE = "Delete"
+        "K_INSERT  Insert  VK_INSERT",
+        "K_DELETE  Delete  VK_DELETE",
         # #K_LWIN
         # #K_RWIN
         # #K_APPS
@@ -170,11 +170,11 @@ module DXJRuby
         # K_NUMPADSLASH = "NumpadDivide"
         "K_RALT  AltRight  VK_ALT",
         "K_UPARROW  ArrowUp  VK_UP",
-        # K_PGUP = "PageUp"
+        "K_PGUP  PageUp  VK_PAGE_UP",
         "K_LEFTARROW  ArrowLeft  VK_LEFT",
         "K_RIGHTARROW  ArrowRight  VK_RIGHT",
         "K_DOWNARROW  ArrowDown  VK_DOWN",
-        # K_PGDN = "PageDown"
+        "K_PGDN  PageDown  VK_PAGE_DOWN",
       ]
 
       def self._parse_config

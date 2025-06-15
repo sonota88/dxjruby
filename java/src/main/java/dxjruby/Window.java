@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.util.function.Consumer;
 
 import javax.swing.JFrame;
@@ -70,6 +71,19 @@ public class Window {
     }
 
     // --------------------------------
+
+    public static void drawImage(
+            final double x, final double y,
+            final Image image,
+            final int z
+            ) {
+        addToDrawQueue(
+                z,
+                g2 -> {
+                    final BufferedImage img = image.getAwtImage();
+                    g2.drawImage(img, toInt(x), toInt(y), null);
+                });
+    }
 
     public static void drawFont(
             final double x, final double y, final String text,
