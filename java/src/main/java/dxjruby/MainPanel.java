@@ -21,6 +21,7 @@ import dxjruby.DrawQueue.Command;
 class MainPanel extends JPanel {
 
     private static boolean painting = false;
+    private DrawQueue drawQueue = new DrawQueue();
 
     public MainPanel(final int winW, final int winH, final Color bgcolor) {
         setBackground(bgcolor);
@@ -35,7 +36,6 @@ class MainPanel extends JPanel {
 
     @Override
     public void paintComponent(final Graphics g) {
-        final DrawQueue drawQueue = DrawQueue.takeSnapshot();
         final List<Integer> sortedZs = drawQueue.getSortedZList();
 
         super.paintComponent(g);
@@ -60,7 +60,11 @@ class MainPanel extends JPanel {
             // skip painting
             DrawQueue.takeSnapshot();
             return;
+        } else {
+            // 描画処理の最中は this.drawQueue を更新しないこと
+            drawQueue = DrawQueue.takeSnapshot();
         }
+
         painting = true;
 
         repaint();
