@@ -155,7 +155,7 @@ class Chara
     when :stop
       if @action_init
         @action_init = false
-        @t_stop_end = Time.now + 2
+        @t_stop_end = Time.now + 1
       end
 
       if Time.now < @t_stop_end

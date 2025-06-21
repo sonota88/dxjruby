@@ -62,12 +62,7 @@ public class Image {
             final int x, final int y,
             final Color color
             ) {
-        Utils.withGraphics2D(
-                img.getGraphics(),
-                g2 -> {
-                    g2.setColor(color);
-                    g2.drawRect(x, y, 1, 1);
-                    });
+        img.setRGB(x, y, color.getRGB());
     }
 
     public void line(

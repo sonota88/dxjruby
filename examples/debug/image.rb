@@ -16,6 +16,10 @@ Window.load_resources do
   img2 = Image.new(10, 20, C_BLUE)
   p [img2.width, img2.height]
   img2.line(0, 0, 10, 20, C_WHITE)
+  (5...10).each { |x| img2[x, 1] = [255, 255, 255] }
+  (5...10).each { |x| img2[x, 3] = [100, 255, 255, 255] }
+  img2[1, 5] = [11, 12, 13, 14]
+  p ["get pixel", img2[1, 5]]
 
   Window.loop do
     Window.draw(10, 20, Image[:img1])

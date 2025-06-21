@@ -38,10 +38,12 @@ module DXJRuby
 
     # Start main loop
     #
-    # When called twice, previous loop is stopped (this is useful
-    # when implementing interactive game editor, etc.)
+    # TODO When called twice, previous loop is stopped (this is useful
+    #      when implementing interactive game editor, etc.)
     def self.loop(&block)
-      j_Window.set_caption("DXJRubyApplication")
+      if j_Window.get_caption() == ""
+        j_Window.set_caption("DXJRubyApplication")
+      end
       j_Window.start_gui()
 
       t_base_loop = Time.now
@@ -52,14 +54,17 @@ module DXJRuby
         @@fpsm.delta += (t_now - t_base_loop) / @@fpsm.span_per_frame
         t_base_loop = t_now
 
-        if @@fpsm.delta > 1.0
-          @@fpsm.delta -= 1.0
+        if @@fpsm.delta >= 1.0
+          while @@fpsm.delta >= 1.0
+            @@fpsm.delta -= 1.0
+          end
+
           @@fpsm.count += 1
 
           j_Window.update_input_state()
           block.call
 
-          j_Window.repaint()
+          j_Window.request_paint()
 
           t_now = Time.now
           span_delta = t_now - t_base_frame
@@ -137,7 +142,26 @@ module DXJRuby
 
     # def self.draw_rot(x, y, image, angle, center_x=nil, center_y=nil, z=0)
 
-    # def self.draw_ex(x, y, image, options={})
+    # blend is not supported
+    def self.draw_ex(x, y, image, options={})
+      z = options[:z] || 0
+      cx = options[:center_x] || (image.width.to_f / 2)
+      cy = options[:center_y] || (image.height.to_f / 2)
+      scalex = options[:scalex] || 1.0
+      scaley = options[:scaley] || 1.0
+      angle = options[:angle] || 0.0
+      alpha = options[:alpha] || 255
+
+      j_Window.draw_ex(
+        x, y, image.to_j,
+        # options
+        z,
+        cx.to_f, cy.to_f,
+        scalex.to_f, scaley.to_f,
+        angle.to_f,
+        alpha
+      )
+    end
 
     def self.draw_font(x, y, string, font, option={})
       unless string.is_a?(String)

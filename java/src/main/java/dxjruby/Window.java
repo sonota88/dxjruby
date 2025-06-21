@@ -2,11 +2,14 @@ package dxjruby;
 
 import static dxjruby.util.Utils.toInt;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.function.Consumer;
 
@@ -58,7 +61,7 @@ public class Window {
         Input.updateKeyState(tNow);
     }
 
-    public static void repaint() {
+    public static void requestPaint() {
         mainPanel.requestPaint();
     }
 
@@ -82,6 +85,60 @@ public class Window {
                 g2 -> {
                     final BufferedImage img = image.getAwtImage();
                     g2.drawImage(img, toInt(x), toInt(y), null);
+                });
+    }
+
+    public static void drawEx(
+            final double x, final double y,
+            final Image image,
+            final int z,
+            final double cx, final double cy,
+            final double scalex, final double scaley,
+            final double angle,
+            final int alpha
+            ) {
+        addToDrawQueue(
+                z,
+                g2 -> {
+                    final AffineTransform atReset = g2.getTransform();
+                    final Composite compReset = g2.getComposite();
+
+                    final AffineTransform atTranslateRev =
+                            AffineTransform.getTranslateInstance(
+                                    (x + cx),
+                                    (y + cy)
+                            );
+
+                    final AffineTransform atTranslate =
+                            AffineTransform.getTranslateInstance(
+                                    -(x + cx),
+                                    -(y + cy)
+                            );
+
+                    final AffineTransform atRotate =
+                            AffineTransform.getRotateInstance(
+                                    Math.toRadians(angle)
+                            );
+
+                    final AffineTransform atScale =
+                            AffineTransform.getScaleInstance(
+                                    scalex, scaley
+                            );
+
+                    final AffineTransform at = new AffineTransform();
+                    at.concatenate(atTranslateRev);
+                    at.concatenate(atRotate);
+                    at.concatenate(atScale);
+                    at.concatenate(atTranslate);
+                    g2.setTransform(at);
+
+                    final float fAlpha = Integer.valueOf(alpha).floatValue() / 255.0F;
+                    g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, fAlpha));
+
+                    g2.drawImage(image.getAwtImage(), toInt(x), toInt(y), null);
+
+                    g2.setTransform(atReset);
+                    g2.setComposite(compReset);
                 });
     }
 

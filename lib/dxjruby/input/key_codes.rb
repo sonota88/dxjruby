@@ -54,7 +54,7 @@ module DXJRuby
         "K_J  KeyJ  VK_J",
         "K_K  KeyK  VK_K",
         "K_L  KeyL  VK_L",
-        # K_SEMICOLON = 'Semicolon'
+        "K_SEMICOLON  Semicolon  VK_SEMICOLON",
         # K_APOSTROPHE = 'Quote'  # '
         # K_GRAVE = "Backquote"   # `
         "K_LSHIFT  ShiftLeft  VK_SHIFT",
@@ -66,9 +66,9 @@ module DXJRuby
         "K_B  KeyB  VK_B",
         "K_N  KeyN  VK_N",
         "K_M  KeyM  VK_M",
-        # K_COMMA = 'Comma'
-        # K_PERIOD = 'Period'
-        # K_SLASH = 'Slash'
+        "K_COMMA   Comma   VK_COMMA",
+        "K_PERIOD  Period  VK_PERIOD",
+        "K_SLASH   Slash   VK_SLASH",
         "K_RSHIFT  ShiftRight  VK_SHIFT",
         # K_MULTIPLY = "NumpadMultiply"
         # #K_LMENU Alt

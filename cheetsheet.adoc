@@ -1,0 +1,64 @@
+:toc:
+
+== テンプレート
+
+[source,ruby]
+--------------------------------
+case RUBY_ENGINE
+when "opal"  then require "dxopal" ; include DXOpal
+when "jruby" then require "dxjruby"; include DXJRuby
+else
+  raise "unsupported engine (#{RUBY_ENGINE})"
+end
+
+Window.load_resources do
+  Window.loop do
+    # ...
+  end
+end
+--------------------------------
+
+
+== API
+
+=== Window
+
+[source,ruby]
+--------------------------------
+Window.draw(
+  x, y, image,
+  z # optional
+)
+
+Window.draw_font(
+  x, y, "string", Font.default,
+  z: 0,         # optional
+  color: C_RED  # optional
+)
+
+Window.draw_line(
+  x1, y1, x2, y2, color,
+  z  # optional
+)
+
+# draw_box_fill も同じ
+Window.draw_box(
+  x1, y1, x2, y2, color,
+  z  # optional
+)
+
+# draw_circle_fill も同じ
+Window.draw_circle(
+  x, y, r, color,
+  z  # optional
+)
+--------------------------------
+
+
+== 参考
+
+DXRuby 1.4.6 リファレンスマニュアル +
+https://mirichi.github.io/dxruby-doc/index.html
+
+dxopal/lib/dxopal at main · yhara/dxopal +
+https://github.com/yhara/dxopal/tree/main/lib/dxopal

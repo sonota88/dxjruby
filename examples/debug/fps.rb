@@ -79,7 +79,6 @@ end
 
 Window.bgcolor = [245, 245, 245]
 Window.fps = FPS
-Window.caption = "examples/debug/fps"
 
 Window.load_resources do
   Window.loop do
