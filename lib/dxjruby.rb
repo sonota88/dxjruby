@@ -7,6 +7,7 @@ require 'dxjruby/input/key_codes'
 require 'dxjruby/image'
 require 'dxjruby/sound'
 require 'dxjruby/sound_effect'
+require 'dxjruby/sprite'
 require 'dxjruby/window'
 require 'dxjruby/version'
 
