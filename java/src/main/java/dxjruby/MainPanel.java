@@ -21,7 +21,7 @@ import dxjruby.DrawQueue.Command;
 class MainPanel extends JPanel {
 
     private static boolean painting = false;
-    private DrawQueue drawQueue = new DrawQueue();
+    private DrawQueue drawQueueSnapshot = new DrawQueue();
 
     public MainPanel(final int winW, final int winH, final Color bgcolor) {
         setBackground(bgcolor);
@@ -36,7 +36,7 @@ class MainPanel extends JPanel {
 
     @Override
     public void paintComponent(final Graphics g) {
-        final List<Integer> sortedZs = drawQueue.getSortedZList();
+        final List<Integer> sortedZs = drawQueueSnapshot.getSortedZList();
 
         super.paintComponent(g);
         final Graphics2D g2 = (Graphics2D) g;
@@ -45,7 +45,7 @@ class MainPanel extends JPanel {
         g2.fillRect(0, 0, Window.getWidth(), Window.getHeight());
 
         for (Integer z : sortedZs) {
-            final List<Command> cmds = drawQueue.getCommands(z);
+            final List<Command> cmds = drawQueueSnapshot.getCommands(z);
             for (Command cmd : cmds) {
                 cmd.execute(g2);
             }
@@ -62,7 +62,7 @@ class MainPanel extends JPanel {
             return;
         } else {
             // 描画処理の最中は this.drawQueue を更新しないこと
-            drawQueue = DrawQueue.takeSnapshot();
+            drawQueueSnapshot = DrawQueue.takeSnapshot();
         }
 
         painting = true;
