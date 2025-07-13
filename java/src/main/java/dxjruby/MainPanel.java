@@ -12,13 +12,13 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.List;
 
-import javax.swing.JPanel;
+import javax.swing.JComponent;
 
 import dxjruby.DXJRuby.OsType;
 import dxjruby.DrawQueue.Command;
 
 @SuppressWarnings("serial")
-class MainPanel extends JPanel {
+class MainPanel extends JComponent {
 
     private static boolean painting = false;
     private DrawQueue drawQueueSnapshot = new DrawQueue();
@@ -27,7 +27,6 @@ class MainPanel extends JPanel {
         setBackground(bgcolor);
         setPreferredSize(new Dimension(winW, winH));
         setFocusable(true);
-        setOpaque(false);
 
         addKeyListener(new KeyListenerImpl());
         addMouseMotionListener(new MouseMotionListenerImpl());
@@ -36,23 +35,25 @@ class MainPanel extends JPanel {
 
     @Override
     public void paintComponent(final Graphics g) {
-        final List<Integer> sortedZs = drawQueueSnapshot.getSortedZList();
+        try {
+            final List<Integer> sortedZs = drawQueueSnapshot.getSortedZList();
 
-        super.paintComponent(g);
-        final Graphics2D g2 = (Graphics2D) g;
+            super.paintComponent(g);
+            final Graphics2D g2 = (Graphics2D) g;
 
-        g2.setColor(Window.getBgcolor());
-        g2.fillRect(0, 0, Window.getWidth(), Window.getHeight());
+            g2.setColor(Window.getBgcolor());
+            g2.fillRect(0, 0, Window.getWidth(), Window.getHeight());
 
-        for (Integer z : sortedZs) {
-            final List<Command> cmds = drawQueueSnapshot.getCommands(z);
-            for (Command cmd : cmds) {
-                cmd.execute(g2);
+            for (Integer z : sortedZs) {
+                final List<Command> cmds = drawQueueSnapshot.getCommands(z);
+                for (Command cmd : cmds) {
+                    cmd.execute(g2);
+                }
             }
+            g2.dispose();
+        } finally {
+            painting = false;
         }
-        g2.dispose();
-
-        painting = false;
     }
 
     void requestPaint() {
@@ -106,7 +107,7 @@ class MainPanel extends JPanel {
 
       @Override
       public void mouseDragged(final MouseEvent e) {
-          // ignore
+          Input.setMousePosition(e.getX(), e.getY());
       }
 
       @Override

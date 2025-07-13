@@ -85,7 +85,7 @@ Window.load_resources do
     exit if Input.key_push?(K_ESCAPE)
 
     count += 1
-    Time.now.then { |t_now|
+    Time.now.yield_self { |t_now|
       if t_base_count + 1 < t_now
         t_base_count = t_now
         count = 0
@@ -135,7 +135,9 @@ Window.load_resources do
       )
     lp.puts format("elapsed: %.3f sec", Time.now - T_START)
     lp.puts format("count: % 3d", count)
-    lp.puts format("fpsm.count: % 3d", Window.fpsm.count)
-    lp.puts format("fpsm.delta: %.1f", Window.fpsm.delta)
+    if RUBY_ENGINE != "opal"
+      lp.puts format("fpsm.count: % 3d", Window.fpsm.count)
+      lp.puts format("fpsm.delta: %.1f", Window.fpsm.delta)
+    end
   end
 end

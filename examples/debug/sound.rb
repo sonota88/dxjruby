@@ -9,7 +9,15 @@ WIN_W = 640
 WIN_H = 480
 FONT = Font.new(16, "monospace")
 
-Sound.register(:s1, File.expand_path("s1.wav", __dir__))
+RESOURCE_DIR =
+  case RUBY_ENGINE
+  when "opal"  then "."
+  when "jruby" then __dir__
+  else
+    raise "unsupported engine (#{RUBY_ENGINE})"
+  end
+
+Sound.register(:s1, File.join(RESOURCE_DIR, "s1.wav"))
 
 def scope() yield end
 
@@ -82,7 +90,9 @@ Window.load_resources do
 
     if Input.mouse_push?(M_LBUTTON)
       # p vol
-      Sound[:s1].set_volume(vol)
+      if RUBY_ENGINE != "opal"
+        Sound[:s1].set_volume(vol)
+      end
       Sound[:s1].play
     end
 

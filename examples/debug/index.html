@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset= "utf-8" />
+    <title>DXOpal</title>
+    <script type="text/javascript" src="../../../build/dxopal.min.js"></script>
+    <script type="text/ruby">
+      file = %x(
+        new URL(location.href).searchParams.get("file")
+      )
+      if file
+        DXOpal.dump_error{ require_remote "#{file}?#{Time.now}" }
+      end
+    </script>
+  </head>
+
+  <body>
+    <canvas id="dxopal-canvas"></canvas>
+    <hr />
+    <div id="dxopal-errors"></div>
+
+    <pre>
+      <a href="index.html?file=main.rb">main.rb</a>
+      <a href="index.html?file=chara.rb">chara.rb</a>
+      <a href="index.html?file=draw.rb">draw.rb</a>
+      <a href="index.html?file=fps.rb">fps.rb</a>
+      <a href="index.html?file=image.rb">image.rb</a>
+      <a href="index.html?file=input.rb">input.rb</a>
+      <a href="index.html?file=sound.rb">sound.rb</a>
+    </pre>
+  </body>
+</html>

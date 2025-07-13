@@ -9,7 +9,7 @@ Window.width = 320
 Window.height = 240
 Window.bgcolor = [200, 200, 200]
 Window.fps = 10
-Window.caption = "example"
+Window.caption = "example" if RUBY_ENGINE != "opal"
 
 # font_name_foo, _ = Font.install("/path/to/some_font.ttf")
 # font_foo = Font.new(12, font_name_foo)

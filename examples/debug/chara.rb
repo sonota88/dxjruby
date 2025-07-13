@@ -71,7 +71,7 @@ class Vec
   def negate(v) Vec(-v.x, -v.y) end
   def +(v) Vec(@x + v.x, @y + v.y) end
   def -(v) self + negate(v) end
-  def *(val) Vec(@x.to_f * val.to_f, @y.to_f * val.to_f) end
+  def *(val) Vec(@x.to_f * val, @y.to_f * val) end
   def /(val) Vec(@x.to_f / val, @y.to_f / val) end
   def magnitude() Math.sqrt(@x ** 2 + @y ** 2) end
   # def to_a() [@x, @y] end
@@ -100,6 +100,8 @@ def q2(x)
 end
 
 class Chara
+  VELOCITY = 0.5
+
   def initialize
     @imgs = CHARA_PATTERNS.map { |pat| to_image(pat) }
     @img_i = 0
@@ -113,7 +115,6 @@ class Chara
     # action: move
     @mv_dest = Vec(100, 200)
     @mv_d = calc_mv_d(@pos, @mv_dest)
-    @mv_step = 0.5
 
     # action: stop
     @t_stop_end = nil
@@ -126,7 +127,7 @@ class Chara
   def calc_mv_d(from, to)
     v = to - from
     v_norm = v / v.magnitude
-    v_norm * @mv_step
+    v_norm * VELOCITY
   end
 
   def change_action(action)
@@ -146,7 +147,7 @@ class Chara
       @counter.count
 
       rest = @mv_dest - @pos
-      if @mv_step <= rest.magnitude
+      if VELOCITY <= rest.magnitude
         @pos += @mv_d
       else
         @pos = @mv_dest

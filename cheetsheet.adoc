@@ -5,8 +5,8 @@
 [source,ruby]
 --------------------------------
 case RUBY_ENGINE
-when "opal"  then require "dxopal" ; include DXOpal
-when "jruby" then require "dxjruby"; include DXJRuby
+when "opal"  then require "dxopal"
+when "jruby" then require "dxjruby"
 else
   raise "unsupported engine (#{RUBY_ENGINE})"
 end
@@ -51,6 +51,17 @@ Window.draw_box(
 Window.draw_circle(
   x, y, r, color,
   z  # optional
+)
+--------------------------------
+
+
+=== Font
+
+[source,ruby]
+--------------------------------
+font = Font.new(
+  16,  # size
+  "monospace"  # name
 )
 --------------------------------
 

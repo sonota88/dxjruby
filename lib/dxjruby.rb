@@ -39,3 +39,7 @@ module DXJRuby
     end
   end
 end
+
+# `require 'dxjruby'` will automatically import names like `Window` to the
+# toplevel (as `require 'dxruby'` does)
+include DXJRuby

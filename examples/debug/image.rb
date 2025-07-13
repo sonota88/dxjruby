@@ -7,7 +7,15 @@ end
 
 Window.bgcolor = [200, 200, 200]
 
-Image.register(:img1, File.join(__dir__, "img_ruby.png"))
+RESOURCE_DIR =
+  case RUBY_ENGINE
+  when "opal"  then "."
+  when "jruby" then __dir__
+  else
+    raise "unsupported engine (#{RUBY_ENGINE})"
+  end
+
+Image.register(:img1, File.join(RESOURCE_DIR, "img_ruby.png"))
 
 Window.load_resources do
   img1 = Image[:img1]

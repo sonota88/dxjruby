@@ -12,6 +12,9 @@ import dxjruby.util.DXJRubyException;
 
 public class Font {
 
+    public static final int WEIGHT_NORMAL = 0;
+    public static final int WEIGHT_BOLD   = 1;
+
     /**
      * <li>key: CSS generic-family name
      * <li>value: Java generic-family name
@@ -32,10 +35,21 @@ public class Font {
     private final int size;
     private final java.awt.Font awtFont;
 
-    public Font(final String name, final int size) {
+    public Font(final String name, final int size, final int weight) {
         this.name = name;
         this.size = size;
-        this.awtFont = new java.awt.Font(name, java.awt.Font.PLAIN, size);
+        this.awtFont = new java.awt.Font(name, toAwtFontStye(weight), size);
+    }
+
+    @SuppressWarnings("boxing")
+    private static int toAwtFontStye(final int weight) {
+        if (weight == WEIGHT_NORMAL) {
+            return java.awt.Font.PLAIN;
+        } else if (weight == WEIGHT_BOLD) {
+            return java.awt.Font.BOLD;
+        } else {
+            throw new DXJRubyException(String.format("invalid font weight (%d)", weight));
+        }
     }
 
     public static List<String> install(final String path) {

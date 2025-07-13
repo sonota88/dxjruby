@@ -26,7 +26,7 @@ module DXJRuby
         "K_8  Digit8  VK_8",
         "K_9  Digit9  VK_9",
         "K_0  Digit0  VK_0",
-        # K_MINUS = 'Minus'
+        "K_MINUS  Minus  VK_MINUS",
         # K_EQUALS = 'Equal'
         "K_BACK  Backspace  VK_BACK_SPACE",
         "K_TAB  Tab  VK_TAB",
@@ -85,7 +85,7 @@ module DXJRuby
         "K_F9   F9   VK_F9",
         "K_F10  F10  VK_F10",
         # K_NUMLOCK = "NumLock"
-        # K_SCROLL = "ScrollLock"
+        "K_SCROLL  ScrollLock  VK_SCROLL_LOCK",
         "K_NUMPAD7  Numpad7  VK_NUMPAD7",
         "K_NUMPAD8  Numpad8  VK_NUMPAD8",
         "K_NUMPAD9  Numpad9  VK_NUMPAD9",
@@ -134,7 +134,7 @@ module DXJRuby
         # K_DIVIDE = "NumpadDivide"
         # #K_SYSRQ
         # #K_RMENU Alt
-        # K_PAUSE = "Pause"
+        "K_PAUSE  Pause  VK_PAUSE",
         "K_HOME  Home  VK_HOME",
         "K_UP     ArrowUp     VK_UP",
         # #K_PRIOR
@@ -160,10 +160,10 @@ module DXJRuby
         # #K_MYCOMPUTER
         # #K_MAIL
         # #K_MEDIASELECT
-        # K_BACKSPACE = 'Backspace'
+        "K_BACKSPACE  Backspace  VK_BACK_SPACE",
         # K_NUMPADSTAR = "NumpadMultiply"
         "K_LALT  AltLeft  VK_ALT",
-        # K_CAPSLOCK = 'CapsLock'
+        "K_CAPSLOCK  CapsLock  VK_CAPS_LOCK",
         # K_NUMPADMINUS = "NumpadSubtract"
         # K_NUMPADPLUS = "NumpadAdd"
         # K_NUMPADPERIOD = "NumpadDecimal"
