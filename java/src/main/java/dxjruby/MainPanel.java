@@ -105,17 +105,17 @@ class MainPanel extends JComponent {
 
     private static class MouseMotionListenerImpl implements MouseMotionListener {
 
-      @Override
-      public void mouseDragged(final MouseEvent e) {
-          Input.setMousePosition(e.getX(), e.getY());
-      }
+        @Override
+        public void mouseDragged(final MouseEvent e) {
+            Input.setMousePosition(e.getX(), e.getY());
+        }
 
-      @Override
-      public void mouseMoved(final MouseEvent e) {
-          Input.setMousePosition(e.getX(), e.getY());
-      }
+        @Override
+        public void mouseMoved(final MouseEvent e) {
+            Input.setMousePosition(e.getX(), e.getY());
+        }
 
-  }
+    }
 
     private static class MouseListenerImpl implements MouseListener {
 
