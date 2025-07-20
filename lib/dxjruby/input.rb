@@ -23,9 +23,9 @@ module DXJRuby
     # # Return 1 if 'down', -1 if 'up'
     # def self.y(pad_number=0)
 
-    # #
-    # # Keyboard
-    # #
+    #
+    # Keyboard
+    #
 
     # Return true if the key is being pressed
     def self.key_down?(code)
@@ -52,9 +52,9 @@ module DXJRuby
     # # Return DOM element set by `keyevent_target=`
     # def self.keyevent_target
 
-    # #
-    # # Mouse
-    # #
+    #
+    # Mouse
+    #
 
     # # (internal) initialize mouse events
     # def self._init_mouse_events

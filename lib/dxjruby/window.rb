@@ -80,19 +80,19 @@ module DXJRuby
       end
     end
 
-    # # (DXOpal original) Pause & resume
-    # def self.pause
-    # def self.paused?
-    # def self.resume
-    # def self.draw_pause_screen
+    ## # (DXOpal original) Pause & resume
+    ## def self.pause
+    ## def self.paused?
+    ## def self.resume
+    ## def self.draw_pause_screen
 
-    # # (internal) call @@block periodically
-    # def self._loop(timestamp)
+    ## # (internal) call @@block periodically
+    ## def self._loop(timestamp)
 
-    # def self._init
+    ## def self._init
 
-    # # Return internal DXOpal::Image object (for experimental/hacking use)
-    # def self._img
+    ## # Return internal DXOpal::Image object (for experimental/hacking use)
+    ## def self._img
 
     def self.fps
       @@fpsm.fps
@@ -128,8 +128,8 @@ module DXJRuby
       j_Window.set_height(h)
     end
 
-    # @@bgcolor = Constants::Colors::C_BLACK
-    # def self.bgcolor
+    ## @@bgcolor = Constants::Colors::C_BLACK
+    ## def self.bgcolor
     def self.bgcolor=(col)
       j_Window.set_bgcolor(j_color(col))
     end
@@ -138,9 +138,9 @@ module DXJRuby
       j_Window.draw_image(x, y, image.to_j, z)
     end
 
-    # def self.draw_scale(x, y, image, scale_x, scale_y, center_x=nil, center_y=nil, z=0)
+    ## def self.draw_scale(x, y, image, scale_x, scale_y, center_x=nil, center_y=nil, z=0)
 
-    # def self.draw_rot(x, y, image, angle, center_x=nil, center_y=nil, z=0)
+    ## def self.draw_rot(x, y, image, angle, center_x=nil, center_y=nil, z=0)
 
     # blend is not supported
     def self.draw_ex(x, y, image, options={})
@@ -178,7 +178,7 @@ module DXJRuby
       )
     end
 
-    # def self.draw_pixel(x, y, color, z=0)
+    ## def self.draw_pixel(x, y, color, z=0)
 
     def self.draw_line(x1, y1, x2, y2, color, z=0)
       j_Window.draw_line(x1, y1, x2, y2, j_color(color), z)
@@ -200,12 +200,12 @@ module DXJRuby
       j_Window.draw_circle_fill(x, y, r, j_color(color), z)
     end
 
-    # def self.draw_triangle(x1, y1, x2, y2, x3, y3, color, z=0)
+    ## def self.draw_triangle(x1, y1, x2, y2, x3, y3, color, z=0)
 
-    # def self.draw_triangle_fill(x1, y1, x2, y2, x3, y3, color, z=0)
+    ## def self.draw_triangle_fill(x1, y1, x2, y2, x3, y3, color, z=0)
 
-    # # (internal)
-    # def self.enqueue_draw(z, *args)
+    ## # (internal)
+    ## def self.enqueue_draw(z, *args)
 
     #
     # DXRuby
