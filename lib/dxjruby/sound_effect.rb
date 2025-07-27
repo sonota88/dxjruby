@@ -91,6 +91,6 @@ module DXJRuby
       @j_sound_effect.play()
     end
 
-    # def add(wave_type=WAVE_RECT, resolution=1000)
+    ## def add(wave_type=WAVE_RECT, resolution=1000)
   end
 end

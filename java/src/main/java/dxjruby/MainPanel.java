@@ -16,6 +16,7 @@ import javax.swing.JComponent;
 
 import dxjruby.DXJRuby.OsType;
 import dxjruby.DrawQueue.Command;
+import dxjruby.util.Utils;
 
 @SuppressWarnings("serial")
 class MainPanel extends JComponent {
@@ -39,18 +40,18 @@ class MainPanel extends JComponent {
             final List<Integer> sortedZs = drawQueueSnapshot.getSortedZList();
 
             super.paintComponent(g);
-            final Graphics2D g2 = (Graphics2D) g;
 
-            g2.setColor(Window.getBgcolor());
-            g2.fillRect(0, 0, Window.getWidth(), Window.getHeight());
+            Utils.withGraphics2D(g, (g2) -> {
+                g2.setColor(Window.getBgcolor());
+                g2.fillRect(0, 0, Window.getWidth(), Window.getHeight());
 
-            for (Integer z : sortedZs) {
-                final List<Command> cmds = drawQueueSnapshot.getCommands(z);
-                for (Command cmd : cmds) {
-                    cmd.execute(g2);
+                for (Integer z : sortedZs) {
+                    final List<Command> cmds = drawQueueSnapshot.getCommands(z);
+                    for (Command cmd : cmds) {
+                        cmd.execute(g2);
+                    }
                 }
-            }
-            g2.dispose();
+            });
         } finally {
             painting = false;
         }

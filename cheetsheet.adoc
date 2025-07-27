@@ -7,8 +7,7 @@
 case RUBY_ENGINE
 when "opal"  then require "dxopal"
 when "jruby" then require "dxjruby"
-else
-  raise "unsupported engine (#{RUBY_ENGINE})"
+else raise "unsupported engine (#{RUBY_ENGINE})"
 end
 
 Window.load_resources do

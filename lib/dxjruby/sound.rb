@@ -16,7 +16,7 @@ module DXJRuby
       set_volume(230)
     end
 
-    # attr_accessor :decoded
+    ## attr_accessor :decoded
 
     # Play this sound
     # TODO: loop_
@@ -24,8 +24,8 @@ module DXJRuby
       @j_sound.play()
     end
 
-    # # Stop playing this sound (if playing)
-    # def stop
+    ## # Stop playing this sound (if playing)
+    ## def stop
 
     # TODO: support for volume change using 'time' parameter
     def set_volume(volume, time=0)

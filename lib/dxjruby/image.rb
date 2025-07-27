@@ -111,25 +111,37 @@ module DXJRuby
     def line(x1, y1, x2, y2, color)
       @j_image.line(x1, y1, x2, y2, j_color(color))
     end
+
+    # Draw a rectangle on this image
+    def box(x1, y1, x2, y2, color)
+      @j_image.box(x1, y1, x2, y2, j_color(color))
+    end
+
+    # Draw a filled box on this image
+    def box_fill(x1, y1, x2, y2, color)
+      @j_image.box_fill(x1, y1, x2, y2, j_color(color))
+    end
+
+    # Draw a circle on this image
+    def circle(x, y, r, color)
+      @j_image.circle(x, y, r, j_color(color))
+    end
     
-    ## # Draw a rectangle on this image
-    ## def box(x1, y1, x2, y2, color)
-    ## 
-    ## # Draw a filled box on this image
-    ## def box_fill(x1, y1, x2, y2, color)
-    ## 
-    ## # Draw a circle on this image
-    ## def circle(x, y, r, color)
-    ## 
-    ## # Draw a filled circle on this image
-    ## def circle_fill(x, y, r, color)
-    ## 
-    ## # Draw a triangle on this image
-    ## def triangle(x1, y1, x2, y2, x3, y3, color)
-    ## 
-    ## # Draw a filled triangle on this image
-    ## def triangle_fill(x1, y1, x2, y2, x3, y3, color)
-    ## 
+    # Draw a filled circle on this image
+    def circle_fill(x, y, r, color)
+      @j_image.circle_fill(x, y, r, j_color(color))
+    end
+
+    # Draw a triangle on this image
+    def triangle(x1, y1, x2, y2, x3, y3, color)
+      @j_image.triangle(x1, y1, x2, y2, x3, y3, j_color(color))
+    end
+
+    # Draw a filled triangle on this image
+    def triangle_fill(x1, y1, x2, y2, x3, y3, color)
+      @j_image.triangle_fill(x1, y1, x2, y2, x3, y3, j_color(color))
+    end
+
     ## # Fill this image with `color`
     ## def fill(color)
     ## 

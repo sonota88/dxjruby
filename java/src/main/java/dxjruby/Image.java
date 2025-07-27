@@ -81,6 +81,19 @@ public class Image {
                     });
     }
 
+    public void box(
+            final double x1, final double y1,
+            final double x2, final double y2,
+            final Color color
+            ) {
+        Utils.withGraphics2D(
+                img.getGraphics(),
+                g2 -> {
+                    g2.setColor(color);
+                    g2.drawRect(0, 0, toInt(x2 - x1), toInt(y2 - y1));
+                    });
+    }
+
     public void boxFill(
             final double x1, final double y1,
             final double x2, final double y2,
@@ -91,6 +104,94 @@ public class Image {
                 g2 -> {
                     g2.setColor(color);
                     g2.fillRect(0, 0, toInt(x2 - x1), toInt(y2 - y1));
+                    });
+    }
+
+    public void circle(
+            final double x, final double y,
+            final double r,
+            final Color color
+            ) {
+        Utils.withGraphics2D(
+                img.getGraphics(),
+                g2 -> {
+                    g2.setColor(color);
+
+                    final double x1 = x - r;
+                    final double y1 = y - r;
+                    final int diameter = toInt(r * 2);
+
+                    g2.drawOval(toInt(x1), toInt(y1), diameter, diameter);
+                    });
+    }
+
+    public void circleFill(
+            final double x, final double y,
+            final double r,
+            final Color color
+            ) {
+        Utils.withGraphics2D(
+                img.getGraphics(),
+                g2 -> {
+                    g2.setColor(color);
+
+                    final double x1 = x - r;
+                    final double y1 = y - r;
+                    final int diameter = toInt(r * 2);
+
+                    g2.fillOval(toInt(x1), toInt(y1), diameter, diameter);
+                    });
+    }
+
+    public void triangle(
+            final double x1, final double y1,
+            final double x2, final double y2,
+            final double x3, final double y3,
+            final Color color
+            ) {
+        Utils.withGraphics2D(
+                img.getGraphics(),
+                g2 -> {
+                    g2.setColor(color);
+
+                    final int[] xs = new int[] {
+                            toInt(x1),
+                            toInt(x2),
+                            toInt(x3)
+                    };
+                    final int[] ys = new int[] {
+                            toInt(y1),
+                            toInt(y2),
+                            toInt(y3)
+                    };
+
+                    g2.drawPolyline(xs, ys, 3);
+                    });
+    }
+
+    public void triangleFill(
+            final double x1, final double y1,
+            final double x2, final double y2,
+            final double x3, final double y3,
+            final Color color
+            ) {
+        Utils.withGraphics2D(
+                img.getGraphics(),
+                g2 -> {
+                    g2.setColor(color);
+
+                    final int[] xs = new int[] {
+                            toInt(x1),
+                            toInt(x2),
+                            toInt(x3)
+                    };
+                    final int[] ys = new int[] {
+                            toInt(y1),
+                            toInt(y2),
+                            toInt(y3)
+                    };
+
+                    g2.drawPolygon(xs, ys, 3);
                     });
     }
 

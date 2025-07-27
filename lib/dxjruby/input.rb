@@ -9,19 +9,19 @@ module DXJRuby
       # M_5TH_BUTTON = 16
     end
 
-    # def self._pressing_keys
+    ## def self._pressing_keys
 
-    # # Internal setup for Input class
-    # def self._init(canvas)
+    ## # Internal setup for Input class
+    ## def self._init(canvas)
     
-    # # Called on every frame from Window
-    # def self._on_tick
+    ## # Called on every frame from Window
+    ## def self._on_tick
 
-    # # Return 1 if 'right', -1 if 'left'
-    # def self.x(pad_number=0)
+    ## # Return 1 if 'right', -1 if 'left'
+    ## def self.x(pad_number=0)
 
-    # # Return 1 if 'down', -1 if 'up'
-    # def self.y(pad_number=0)
+    ## # Return 1 if 'down', -1 if 'up'
+    ## def self.y(pad_number=0)
 
     #
     # Keyboard
@@ -42,22 +42,22 @@ module DXJRuby
       j_Input.key_release_p(code.value)
     end
 
-    # # Set DOM element to receive keydown/keyup event
-    # #
-    # # By default, `window` is set to this (i.e. all key events are
-    # # stolen by DXOpal.) If canvas element is set to this, only key events
-    # # happend on canvas are processed by DXOpal.
-    # def self.keyevent_target=(target)
+    ## # Set DOM element to receive keydown/keyup event
+    ## #
+    ## # By default, `window` is set to this (i.e. all key events are
+    ## # stolen by DXOpal.) If canvas element is set to this, only key events
+    ## # happend on canvas are processed by DXOpal.
+    ## def self.keyevent_target=(target)
 
-    # # Return DOM element set by `keyevent_target=`
-    # def self.keyevent_target
+    ## # Return DOM element set by `keyevent_target=`
+    ## def self.keyevent_target
 
     #
     # Mouse
     #
 
-    # # (internal) initialize mouse events
-    # def self._init_mouse_events
+    ## # (internal) initialize mouse events
+    ## def self._init_mouse_events
 
     # Return position of mouse cursor
     # (0, 0) is the top-left corner of the canvas
@@ -68,10 +68,10 @@ module DXJRuby
       j_Input.get_mouse_y()
     end
 
-    # class << self
-    #   alias mouse_pos_x mouse_x
-    #   alias mouse_pos_y mouse_y
-    # end
+    ## class << self
+    ##   alias mouse_pos_x mouse_x
+    ##   alias mouse_pos_y mouse_y
+    ## end
 
     # Return true if the mouse button is being pressed
     def self.mouse_down?(mouse_code)

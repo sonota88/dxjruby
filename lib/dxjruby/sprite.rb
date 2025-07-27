@@ -2,8 +2,8 @@
 
 module DXJRuby
   class Sprite
-    ## extend DXOpal::Sprite::CollisionCheck::ClassMethods
-    ## include DXOpal::Sprite::CollisionCheck
+    ## extend DXJRuby::Sprite::CollisionCheck::ClassMethods
+    ## include DXJRuby::Sprite::CollisionCheck
 
     # Call #update on each sprite (unless it is vanished or do not have #update)
     def self.update(sprites)
