@@ -65,6 +65,29 @@ font = Font.new(
 --------------------------------
 
 
+=== SoundEffect
+
+[source,ruby]
+--------------------------------
+SoundEffect.register(
+  :se1,     # name
+  500,      # duration (msec)
+  WAVE_TRI  # WAVE_SIN | WAVE_SAW | WAVE_TRI | WAVE_RECT
+) do
+  # ...
+  [
+    frequency,  # Hz
+    volume      # 0<= ... <= 255
+  ]
+end
+--------------------------------
+
+==== 参考
+
+SoundEffectチュートリアル +
+https://mirichi.github.io/dxruby-doc/tutorial/soundeffect.html
+
+
 == 参考
 
 DXRuby 1.4.6 リファレンスマニュアル +
