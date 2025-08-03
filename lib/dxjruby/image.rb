@@ -33,12 +33,12 @@ module DXJRuby
     ##     [max, min, ((360-h)/60.0)*(max-min) + min]
     ##   end
     ## end
-    
+
     # Load remote image (called via Window.load_resources)
     def self._load(path_or_url)
       new(nil, nil, path_or_url:)
     end
-    
+
     ## attr_accessor :promise, :loaded
     ## def loaded?
     ## 
@@ -93,7 +93,7 @@ module DXJRuby
     ## 
     ## # Draw some text on this image
     ## def draw_font(x, y, string, font, color=[255,255,255])
-    
+
     # Get a pixel as ARGB array
     def [](x, y)
       @j_image.get_pixel(x, y).to_a
@@ -103,10 +103,10 @@ module DXJRuby
     def []=(x, y, color)
       @j_image.set_pixel(x, y, j_color(color))
     end
-    
+
     ## # Return true if the pixel at `(x, y)` has the `color`
     ## def compare(x, y, color)
-    
+
     # Draw a line on this image
     def line(x1, y1, x2, y2, color)
       @j_image.line(x1, y1, x2, y2, j_color(color))
@@ -126,7 +126,7 @@ module DXJRuby
     def circle(x, y, r, color)
       @j_image.circle(x, y, r, j_color(color))
     end
-    
+
     # Draw a filled circle on this image
     def circle_fill(x, y, r, color)
       @j_image.circle_fill(x, y, r, j_color(color))
