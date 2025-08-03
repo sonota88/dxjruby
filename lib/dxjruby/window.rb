@@ -147,8 +147,8 @@ module DXJRuby
       z = options[:z] || 0
       cx = options[:center_x] || (image.width.to_f / 2)
       cy = options[:center_y] || (image.height.to_f / 2)
-      scalex = options[:scalex] || 1.0
-      scaley = options[:scaley] || 1.0
+      scalex = options[:scale_x] || 1.0
+      scaley = options[:scale_y] || 1.0
       angle = options[:angle] || 0.0
       alpha = options[:alpha] || 255
 
