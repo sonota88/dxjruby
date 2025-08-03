@@ -68,10 +68,10 @@ module DXJRuby
       j_Input.get_mouse_y()
     end
 
-    ## class << self
-    ##   alias mouse_pos_x mouse_x
-    ##   alias mouse_pos_y mouse_y
-    ## end
+    class << self
+      alias mouse_pos_x mouse_x
+      alias mouse_pos_y mouse_y
+    end
 
     # Return true if the mouse button is being pressed
     def self.mouse_down?(mouse_code)

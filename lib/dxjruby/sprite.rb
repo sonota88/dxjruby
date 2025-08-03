@@ -1,9 +1,9 @@
-## require 'dxjruby/sprite/collision_check'
+require 'dxjruby/sprite/collision_check'
 
 module DXJRuby
   class Sprite
-    ## extend DXJRuby::Sprite::CollisionCheck::ClassMethods
-    ## include DXJRuby::Sprite::CollisionCheck
+    extend DXJRuby::Sprite::CollisionCheck::ClassMethods
+    include DXJRuby::Sprite::CollisionCheck
 
     # Call #update on each sprite (unless it is vanished or do not have #update)
     def self.update(sprites)
@@ -41,7 +41,7 @@ module DXJRuby
 
       @visible = true
       @vanished = false
-      ## _init_collision_info(@image)
+      _init_collision_info(@image)
     end
     attr_accessor :z, :visible
 

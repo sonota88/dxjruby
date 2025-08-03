@@ -47,7 +47,7 @@ module DXJRuby
     ## def load(path_or_url)
     ## 
     ## def onload(&block)
-    
+
     # Create an instance of Image
     def initialize(width, height, color=C_DEFAULT, path_or_url: nil)
       if path_or_url
