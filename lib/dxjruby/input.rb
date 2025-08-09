@@ -13,7 +13,7 @@ module DXJRuby
 
     ## # Internal setup for Input class
     ## def self._init(canvas)
-    
+
     ## # Called on every frame from Window
     ## def self._on_tick
 

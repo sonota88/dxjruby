@@ -196,14 +196,14 @@ module DXJRuby
               fRad_Y: scale_y1 * r1,
               fAngle: angle1,
               fCx: x1,
-              fCy: y1,
+              fCy: y1
             )
             e2 = CCk::Ellipse.new(
               fRad_X: scale_x2 * r2,
               fRad_Y: scale_y2 * r2,
               fAngle: angle2,
               fCx: x2,
-              fCy: y2,
+              fCy: y2
             )
 
             CCk.check_ellipse_ellipse(e1, e2)

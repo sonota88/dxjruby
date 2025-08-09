@@ -2,7 +2,6 @@ require_relative "remote_resource"
 
 module DXJRuby
   module Window
-
     # Load resources specified with Image.register or Sound.register
     # Call block when loaded
     def self.load_resources(&block)
