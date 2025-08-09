@@ -1,8 +1,7 @@
 case RUBY_ENGINE
-when "opal"  then require "dxopal" ; include DXOpal
-when "jruby" then require "dxjruby"; include DXJRuby
-else
-  raise "unsupported engine (#{RUBY_ENGINE})"
+when "opal"  then require "dxopal"
+when "jruby" then require "dxjruby"
+else raise "unsupported engine (#{RUBY_ENGINE})"
 end
 
 WIN_W = 640

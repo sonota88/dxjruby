@@ -1,13 +1,7 @@
 module DXJRuby
   class Sprite
     module CollisionChecker
-      class Ellipse
-        attr_reader :fRad_X, :fRad_Y, :fAngle, :fCx, :fCy
-        def initialize(fRad_X:, fRad_Y:, fAngle:, fCx:, fCy:)
-          @fRad_X, @fRad_Y, @fAngle, @fCx, @fCy =
-           fRad_X,  fRad_Y,  fAngle,  fCx,  fCy
-        end
-      end
+      Ellipse = Struct.new(:fRad_X, :fRad_Y, :fAngle, :fCx, :fCy)
 
       def self._intersect(x1, y1, x2, y2, x3, y3, x4, y4)
         ((x1 - x2) * (y3 - y1) + (y1 - y2) * (x1 - x3)) *

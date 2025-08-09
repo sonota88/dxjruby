@@ -30,7 +30,7 @@ public class Window {
     }
 
     public static void startGui() {
-        frame.setLocation(0, 0);
+        frame.setLocationByPlatform(true);
 
         frame.setResizable(false);
         setCloseOperation(frame);

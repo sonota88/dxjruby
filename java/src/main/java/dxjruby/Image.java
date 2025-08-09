@@ -165,7 +165,7 @@ public class Image {
                             toInt(y3)
                     };
 
-                    g2.drawPolyline(xs, ys, 3);
+                    g2.drawPolygon(xs, ys, 3);
                     });
     }
 
@@ -191,7 +191,7 @@ public class Image {
                             toInt(y3)
                     };
 
-                    g2.drawPolygon(xs, ys, 3);
+                    g2.fillPolygon(xs, ys, 3);
                     });
     }
 
