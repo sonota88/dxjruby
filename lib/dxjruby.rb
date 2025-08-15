@@ -14,10 +14,17 @@ require 'dxjruby/version'
 if ENV.key?("DXJRUBY_JAR")
   require ENV["DXJRUBY_JAR"]
 else
-  require File.expand_path(
-    "../java/target/dxjruby-#{DXJRuby::VERSION}.jar",
-    __dir__
-  )
+  proj_dir = File.expand_path("..", __dir__)
+  jar_path_candidates = [
+    File.join(proj_dir, "dxjruby-#{DXJRuby::VERSION}.jar"),
+    File.join(proj_dir, "java/target/dxjruby-#{DXJRuby::VERSION}.jar"), # for develop
+  ]
+  jar_path = jar_path_candidates.find { |jar_path| File.exist?(jar_path) }
+  if jar_path
+    require jar_path
+  else
+    raise "jar file not found"
+  end
 end
 
 DXJRuby::Input::KeyCodes.init

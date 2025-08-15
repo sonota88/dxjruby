@@ -17,6 +17,8 @@ RESOURCE_DIR =
   end
 
 Sound.register(:s1, File.join(RESOURCE_DIR, "s1.wav"))
+Sound.register(:bgm, File.join(RESOURCE_DIR, "bgm_1ch.wav"))
+# Sound.register(:bgm, File.join(RESOURCE_DIR, "bgm_2ch.wav"))
 
 def scope() yield end
 
@@ -102,6 +104,9 @@ Window.load_resources do
       end      
     }
     SoundEffect[se_name].play if se_name
+
+    Sound[:bgm].play(true) if Input.key_push?(K_B)
+    Sound[:bgm].stop       if Input.key_push?(K_N)
 
     Window.draw_font(10, 10, "volume (#{vol})", FONT)
   end
