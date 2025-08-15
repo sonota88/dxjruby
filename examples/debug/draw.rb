@@ -50,6 +50,5 @@ Window.load_resources do
     # ex_rot(img_blue)
     # ex_alpha(img_blue)
     ex_all(img_blue)
-
   end
 end

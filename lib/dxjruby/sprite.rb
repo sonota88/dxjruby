@@ -87,10 +87,12 @@ module DXJRuby
       raise "image not set to Sprite" if @image.nil?
       return if !@visible
 
-      Window.draw_ex(@x, @y, @image,
-                     scale_x: @scale_x, scale_y: @scale_y,
-                     alpha: @alpha, blend: @blend,
-                     angle: @angle, center_x: @center_x, center_y: @center_y)
+      Window.draw_ex(
+        @x, @y, @image,
+        scale_x: @scale_x, scale_y: @scale_y,
+        alpha: @alpha, blend: @blend,
+        angle: @angle, center_x: @center_x, center_y: @center_y
+      )
     end
   end
 end

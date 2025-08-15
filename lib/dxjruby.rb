@@ -15,9 +15,9 @@ if ENV.key?("DXJRUBY_JAR")
   require ENV["DXJRUBY_JAR"]
 else
   require File.expand_path(
-            "../java/target/dxjruby-#{DXJRuby::VERSION}.jar",
-            __dir__
-          )
+    "../java/target/dxjruby-#{DXJRuby::VERSION}.jar",
+    __dir__
+  )
 end
 
 DXJRuby::Input::KeyCodes.init

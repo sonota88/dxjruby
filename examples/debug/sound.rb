@@ -42,7 +42,7 @@ scope {
   f = 1300
   SoundEffect.register(:se1, 500) do
     c = c - 1
-    if c < 0 then
+    if c < 0
       v = v - 0.2
       f = 1760
     end
