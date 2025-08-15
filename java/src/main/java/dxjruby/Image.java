@@ -1,7 +1,5 @@
 package dxjruby;
 
-import static dxjruby.util.Utils.toInt;
-
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -10,6 +8,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import dxjruby.graphic.Drawer;
 import dxjruby.util.DXJRubyException;
 import dxjruby.util.Utils;
 
@@ -72,13 +71,8 @@ public class Image {
             ) {
         Utils.withGraphics2D(
                 img.getGraphics(),
-                g2 -> {
-                    g2.setColor(color);
-                    g2.drawLine(
-                            toInt(x1), toInt(y1),
-                            toInt(x2), toInt(y2)
-                            );
-                    });
+                g2 -> Drawer.line(g2, x1, y1, x2, y2, color)
+                );
     }
 
     public void box(
@@ -88,10 +82,8 @@ public class Image {
             ) {
         Utils.withGraphics2D(
                 img.getGraphics(),
-                g2 -> {
-                    g2.setColor(color);
-                    g2.drawRect(0, 0, toInt(x2 - x1), toInt(y2 - y1));
-                    });
+                g2 -> Drawer.box(g2, x1, y1, x2, y2, color)
+                );
     }
 
     public void boxFill(
@@ -101,10 +93,8 @@ public class Image {
             ) {
         Utils.withGraphics2D(
                 img.getGraphics(),
-                g2 -> {
-                    g2.setColor(color);
-                    g2.fillRect(0, 0, toInt(x2 - x1), toInt(y2 - y1));
-                    });
+                g2 -> Drawer.boxFill(g2, x1, y1, x2, y2, color)
+                );
     }
 
     public void circle(
@@ -114,15 +104,8 @@ public class Image {
             ) {
         Utils.withGraphics2D(
                 img.getGraphics(),
-                g2 -> {
-                    g2.setColor(color);
-
-                    final double x1 = x - r;
-                    final double y1 = y - r;
-                    final int diameter = toInt(r * 2);
-
-                    g2.drawOval(toInt(x1), toInt(y1), diameter, diameter);
-                    });
+                g2 -> Drawer.circle(g2, x, y, r, color)
+                );
     }
 
     public void circleFill(
@@ -132,15 +115,8 @@ public class Image {
             ) {
         Utils.withGraphics2D(
                 img.getGraphics(),
-                g2 -> {
-                    g2.setColor(color);
-
-                    final double x1 = x - r;
-                    final double y1 = y - r;
-                    final int diameter = toInt(r * 2);
-
-                    g2.fillOval(toInt(x1), toInt(y1), diameter, diameter);
-                    });
+                g2 -> Drawer.circleFill(g2, x, y, r, color)
+                );
     }
 
     public void triangle(
@@ -151,22 +127,8 @@ public class Image {
             ) {
         Utils.withGraphics2D(
                 img.getGraphics(),
-                g2 -> {
-                    g2.setColor(color);
-
-                    final int[] xs = new int[] {
-                            toInt(x1),
-                            toInt(x2),
-                            toInt(x3)
-                    };
-                    final int[] ys = new int[] {
-                            toInt(y1),
-                            toInt(y2),
-                            toInt(y3)
-                    };
-
-                    g2.drawPolygon(xs, ys, 3);
-                    });
+                g2 -> Drawer.triangle(g2, x1, y1, x2, y2, x3, y3, color)
+                );
     }
 
     public void triangleFill(
@@ -177,22 +139,8 @@ public class Image {
             ) {
         Utils.withGraphics2D(
                 img.getGraphics(),
-                g2 -> {
-                    g2.setColor(color);
-
-                    final int[] xs = new int[] {
-                            toInt(x1),
-                            toInt(x2),
-                            toInt(x3)
-                    };
-                    final int[] ys = new int[] {
-                            toInt(y1),
-                            toInt(y2),
-                            toInt(y3)
-                    };
-
-                    g2.fillPolygon(xs, ys, 3);
-                    });
+                g2 -> Drawer.triangleFill(g2, x1, y1, x2, y2, x3, y3, color)
+                );
     }
 
     public BufferedImage getAwtImage() {

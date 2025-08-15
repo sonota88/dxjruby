@@ -16,6 +16,7 @@ import java.util.function.Consumer;
 import javax.swing.JFrame;
 
 import dxjruby.DrawQueue.Command;
+import dxjruby.graphic.Drawer;
 
 public class Window {
 
@@ -172,15 +173,8 @@ public class Window {
             ) {
         addToDrawQueue(
                 z,
-                g2 -> {
-                    g2.setColor(c);
-                    enableAntiAlias(g2);
-
-                    g2.drawLine(
-                            toInt(x1), toInt(y1),
-                            toInt(x2), toInt(y2)
-                            );
-                });
+                g2 -> Drawer.line(g2, x1, y1, x2, y2, c)
+                );
     }
 
     public static void drawBox(
@@ -193,14 +187,8 @@ public class Window {
             ) {
         addToDrawQueue(
                 z,
-                g2 -> {
-                    g2.setColor(color);
-                    enableAntiAlias(g2);
-
-                    final double width = x2 - x1;
-                    final double height = y2 - y1;
-                    g2.drawRect(toInt(x1), toInt(y1), toInt(width), toInt(height));
-                });
+                g2 -> Drawer.box(g2, x1, y1, x2, y2, color)
+                );
     }
 
     public static void drawBoxFill(
@@ -213,14 +201,8 @@ public class Window {
             ) {
         addToDrawQueue(
                 z,
-                g2 -> {
-                    g2.setColor(color);
-                    enableAntiAlias(g2);
-
-                    final double width = x2 - x1;
-                    final double height = y2 - y1;
-                    g2.fillRect(toInt(x1), toInt(y1), toInt(width), toInt(height));
-                });
+                g2 -> Drawer.boxFill(g2, x1, y1, x2, y2, color)
+                );
     }
 
     public static void drawCircle(
@@ -229,16 +211,8 @@ public class Window {
             ) {
         addToDrawQueue(
                 z,
-                g2 -> {
-                    g2.setColor(c);
-                    enableAntiAlias(g2);
-
-                    final double x1 = x - r;
-                    final double y1 = y - r;
-                    final int diameter = toInt(r * 2);
-
-                    g2.drawOval(toInt(x1), toInt(y1), diameter, diameter);
-                });
+                g2 -> Drawer.circle(g2, x, y, r, c)
+                );
     }
 
     public static void drawCircleFill(
@@ -247,32 +221,8 @@ public class Window {
             ) {
         addToDrawQueue(
                 z,
-                g2 -> {
-                    g2.setColor(c);
-                    enableAntiAlias(g2);
-
-                    final double x1 = x - r;
-                    final double y1 = y - r;
-                    final int diameter = toInt(r * 2);
-
-                    g2.fillOval(toInt(x1), toInt(y1), diameter, diameter);
-                });
-    }
-
-    /**
-     * <pre>
-     * antialias
-     * DXRuby: disabled
-     * DXOpal: enabled
-     * </pre>
-     */
-    private static void enableAntiAlias(final Graphics2D g2) {
-        /*
-        g2.setRenderingHint(
-                RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON
-        );
-        */
+                g2 -> Drawer.circleFill(g2, x, y, r, c)
+                );
     }
 
     private static void addToDrawQueue(final int z, final Consumer<Graphics2D> func) {

@@ -17,11 +17,21 @@ module DXJRuby
     ## # Called on every frame from Window
     ## def self._on_tick
 
-    ## # Return 1 if 'right', -1 if 'left'
-    ## def self.x(pad_number=0)
+    # Return 1 if 'right', -1 if 'left'
+    def self.x(pad_number=0)
+      ret = 0
+      ret += 1 if key_down?(K_RIGHT)
+      ret -= 1 if key_down?(K_LEFT)
+      ret
+    end
 
-    ## # Return 1 if 'down', -1 if 'up'
-    ## def self.y(pad_number=0)
+    # Return 1 if 'down', -1 if 'up'
+    def self.y(pad_number=0)
+      ret = 0
+      ret += 1 if key_down?(K_DOWN)
+      ret -= 1 if key_down?(K_UP)
+      ret
+    end
 
     #
     # Keyboard

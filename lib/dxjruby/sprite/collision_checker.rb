@@ -24,7 +24,7 @@ module DXJRuby
         cy = y-y1
 
         if vx == 0 && vy == 0
-          return CCk.check_point_circle(x, y, r, x1, y1)
+          return check_point_circle(x, y, r, x1, y1)
         end
 
         n1 = vx * cx + vy * cy
@@ -114,8 +114,8 @@ module DXJRuby
       end
 
       def self.check_circle_tilted_rect(cx, cy, cr, x1, y1, x2, y2, x3, y3, x4, y4)
-        CollisionChecker.check_point_triangle(cx, cy, x1, y1, x2, y2, x3, y3) ||
-          CollisionChecker.check_point_triangle(cx, cy, x1, y1, x3, y3, x4, y4) ||
+        check_point_triangle(cx, cy, x1, y1, x2, y2, x3, y3) ||
+          check_point_triangle(cx, cy, x1, y1, x3, y3, x4, y4) ||
           _check_circle_line(cx, cy, cr, x1, y1, x2, y2) ||
           _check_circle_line(cx, cy, cr, x2, y2, x3, y3) ||
           _check_circle_line(cx, cy, cr, x3, y3, x4, y4) ||
@@ -123,7 +123,7 @@ module DXJRuby
       end
 
       def self.check_circle_triangle(cx, cy, cr, x1, y1, x2, y2, x3, y3)
-        CollisionChecker.check_point_triangle(cx, cy, x1, y1, x2, y2, x3, y3) ||
+        check_point_triangle(cx, cy, x1, y1, x2, y2, x3, y3) ||
           _check_circle_line(cx, cy, cr, x1, y1, x2, y2) ||
           _check_circle_line(cx, cy, cr, x2, y2, x3, y3) ||
           _check_circle_line(cx, cy, cr, x3, y3, x1, y1)
@@ -151,9 +151,9 @@ module DXJRuby
           _check_line_line(ox4, oy4, ox1, oy1, dx1, dy1, dx2, dy2) ||
           _check_line_line(ox4, oy4, ox1, oy1, dx2, dy2, dx3, dy3) ||
           _check_line_line(ox4, oy4, ox1, oy1, dx3, dy3, dx1, dy1) ||
-          CollisionChecker.check_point_triangle(dx1, dy1, ox1, oy1, ox2, oy2, ox3, oy3) ||
-          CollisionChecker.check_point_triangle(dx1, dy1, ox1, oy1, ox3, oy3, ox4, oy4) ||
-          CollisionChecker.check_point_triangle(ox1, oy1, dx1, dy1, dx2, dy2, dx3, dy3)
+          check_point_triangle(dx1, dy1, ox1, oy1, ox2, oy2, ox3, oy3) ||
+          check_point_triangle(dx1, dy1, ox1, oy1, ox3, oy3, ox4, oy4) ||
+          check_point_triangle(ox1, oy1, dx1, dy1, dx2, dy2, dx3, dy3)
       end
 
       # Triangle vs Triangle
@@ -165,8 +165,8 @@ module DXJRuby
           _check_line_line(ox2, oy2, ox3, oy3, dx3, dy3, dx1, dy1) ||
           _check_line_line(ox3, oy3, ox1, oy1, dx1, dy1, dx2, dy2) ||
           _check_line_line(ox3, oy3, ox1, oy1, dx2, dy2, dx3, dy3) ||
-          CollisionChecker.check_point_triangle(ox1, oy1, dx1, dy1, dx2, dy2, dx3, dy3) ||
-          CollisionChecker.check_point_triangle(dx1, dy1, ox1, oy1, ox2, oy2, ox3, oy3)
+          check_point_triangle(ox1, oy1, dx1, dy1, dx2, dy2, dx3, dy3) ||
+          check_point_triangle(dx1, dy1, ox1, oy1, ox2, oy2, ox3, oy3)
       end
     end
   end
