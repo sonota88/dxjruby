@@ -128,10 +128,10 @@ Window.load_resources do
 
     lp.reset
     lp.puts format(
-        "fps: %d, average: %.1f",
-        Window.real_fps,
-        fps_hist.sum.to_f / fps_hist.size
-      )
+      "fps: %d, average: %.1f",
+      Window.real_fps,
+      fps_hist.sum.to_f / fps_hist.size
+    )
     lp.puts format("elapsed: %.3f sec", Time.now - T_START)
     lp.puts format("count: % 3d", count)
     if RUBY_ENGINE != "opal"
