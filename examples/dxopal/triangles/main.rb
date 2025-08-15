@@ -49,7 +49,7 @@ class Bullet < Sprite
   end
 
   def shot(other)
-    #self.vanish
+    # self.vanish
   end
 
   def update
@@ -109,7 +109,7 @@ Window.load_resources do
     Window.draw_font(0, 0, "FPS: #{Window.real_fps}", Font.default)
     sprites = [player] + player.bullets + enemies
     Sprite.draw(sprites)
-    #Sprite.check([player], enemies)
+    # Sprite.check([player], enemies)
     Sprite.check(player.bullets, enemies)
     Sprite.update(sprites)
     Sprite.clean(enemies)
