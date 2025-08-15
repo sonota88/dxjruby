@@ -14,7 +14,8 @@ import java.util.List;
 import javax.swing.JComponent;
 
 import dxjruby.DXJRuby.OsType;
-import dxjruby.DrawQueue.Command;
+import dxjruby.graphic.DrawQueue;
+import dxjruby.graphic.DrawQueue.Command;
 import dxjruby.util.Utils;
 
 @SuppressWarnings("serial")

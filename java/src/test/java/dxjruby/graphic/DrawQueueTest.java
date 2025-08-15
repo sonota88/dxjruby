@@ -1,4 +1,4 @@
-package dxjruby;
+package dxjruby.graphic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import dxjruby.DrawQueue.Command;
+import dxjruby.graphic.DrawQueue.Command;
 
 public class DrawQueueTest {
 

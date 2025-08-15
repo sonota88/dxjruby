@@ -15,7 +15,8 @@ import java.util.function.Consumer;
 
 import javax.swing.JFrame;
 
-import dxjruby.DrawQueue.Command;
+import dxjruby.graphic.DrawQueue;
+import dxjruby.graphic.DrawQueue.Command;
 import dxjruby.graphic.Drawer;
 
 public class Window {

@@ -1,4 +1,4 @@
-package dxjruby;
+package dxjruby.graphic;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class DrawQueue {
     /** key: z */
     private Map<Integer, List<Command>> map;
 
-    DrawQueue() {
+    public DrawQueue() {
         this.map = new HashMap<>();
     }
 
