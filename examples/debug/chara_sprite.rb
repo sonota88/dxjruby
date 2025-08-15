@@ -188,7 +188,7 @@ Window.load_resources do
         end
       else
         if charas.size >= 2
-          charas.shuffle[0].vanish
+          charas.sample.vanish
         end
       end
     end
