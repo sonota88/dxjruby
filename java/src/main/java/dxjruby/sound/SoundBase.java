@@ -25,7 +25,7 @@ public abstract class SoundBase {
         createClip(getAudioData());
     }
 
-    public void play() {
+    public void play(final boolean loop) {
         this.clip = createClip(getAudioData());
 
         final FloatControl ctrl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
@@ -38,6 +38,10 @@ public abstract class SoundBase {
         }
 
         ctrl.setValue(db);
+
+        if (loop) {
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
 
         final LineListener lineListener = new LineListener() {
             @Override

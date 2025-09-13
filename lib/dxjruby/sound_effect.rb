@@ -87,8 +87,8 @@ module DXJRuby
       @j_sound_effect = Java::dxjruby.Sound.create_sound_effect(samples)
     end
 
-    def play
-      @j_sound_effect.play()
+    def play(_loop = false)
+      @j_sound_effect.play(_loop)
     end
 
     ## def add(wave_type=WAVE_RECT, resolution=1000)

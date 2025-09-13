@@ -19,9 +19,8 @@ module DXJRuby
     ## attr_accessor :decoded
 
     # Play this sound
-    # TODO: loop_
     def play(loop_ = false)
-      @j_sound.play()
+      @j_sound.play(loop_)
     end
 
     # Stop playing this sound (if playing)
