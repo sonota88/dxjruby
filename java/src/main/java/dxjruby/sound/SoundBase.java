@@ -16,6 +16,7 @@ public abstract class SoundBase {
 
     private AudioData audioData;
     private int volume = 255; // 0<=..<=255
+    private Clip clip;
 
     protected void init(AudioData audioData) {
         this.audioData = audioData;
@@ -25,7 +26,7 @@ public abstract class SoundBase {
     }
 
     public void play() {
-        final Clip clip = createClip(getAudioData());
+        this.clip = createClip(getAudioData());
 
         final FloatControl ctrl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 
@@ -49,6 +50,13 @@ public abstract class SoundBase {
 
         clip.setFramePosition(0);
         clip.start();
+    }
+
+    public void stop() {
+        if (this.clip != null) {
+            this.clip.stop();
+            this.clip.close();
+        }
     }
 
     private final static Clip createClip(final AudioData audioData) {

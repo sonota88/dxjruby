@@ -24,8 +24,10 @@ module DXJRuby
       @j_sound.play()
     end
 
-    ## # Stop playing this sound (if playing)
-    ## def stop
+    # Stop playing this sound (if playing)
+    def stop
+      @j_sound.stop()
+    end
 
     # TODO: support for volume change using 'time' parameter
     def set_volume(volume, time=0)
