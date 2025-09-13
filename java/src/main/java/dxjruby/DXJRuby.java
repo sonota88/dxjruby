@@ -10,6 +10,8 @@ public class DXJRuby {
         OS_TYPE = OsType.from(System.getProperty("os.name"));
     }
 
+    public static boolean shapeAntialiasEnabled = true;
+
     public static Color toAwtColor(final int a, final int r, final int g, final int b) {
         return new Color(r, g, b, a);
     }

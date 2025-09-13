@@ -39,6 +39,14 @@ module DXJRuby
       raise "invalid command (#{cmd})"
     end
   end
+
+  def self.shape_antialias_enabled=(enabled)
+    Java::dxjruby.DXJRuby.shapeAntialiasEnabled = enabled
+  end
+
+  def self.shape_antialias_enabled
+    Java::dxjruby.DXJRuby.shapeAntialiasEnabled
+  end
 end
 
 # `require 'dxjruby'` will automatically import names like `Window` to the

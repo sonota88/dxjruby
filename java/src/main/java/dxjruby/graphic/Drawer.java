@@ -4,6 +4,9 @@ import static dxjruby.util.Utils.toInt;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+
+import dxjruby.DXJRuby;
 
 public class Drawer {
 
@@ -138,12 +141,12 @@ public class Drawer {
      * </pre>
      */
     private static void enableAntiAlias(final Graphics2D g2) {
-        /*
-        g2.setRenderingHint(
-                RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON
-        );
-        */
+        if (DXJRuby.shapeAntialiasEnabled) {
+            g2.setRenderingHint(
+                    RenderingHints.KEY_ANTIALIASING,
+                    RenderingHints.VALUE_ANTIALIAS_ON
+            );
+        }
     }
 
 }

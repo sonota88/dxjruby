@@ -4,6 +4,8 @@ when "jruby" then require "dxjruby"
 else raise "unsupported engine (#{RUBY_ENGINE})"
 end
 
+DXJRuby.shape_antialias_enabled = false
+
 Window.width = 320
 Window.height = 240
 Window.bgcolor = [200, 200, 200]
