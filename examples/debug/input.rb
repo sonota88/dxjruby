@@ -80,8 +80,8 @@ Window.load_resources do
 
     # 負荷をかける
     2000.times do
-      x = 200 + rand(440)
-      y = rand(480)
+      x = 200 + rand(WIN_W - 200)
+      y = rand(WIN_H)
       Window.draw_circle_fill(
         x, y, 10 + rand(20), [100, rand(255), rand(255), rand(255)]
       )
