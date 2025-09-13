@@ -105,8 +105,8 @@ Window.load_resources do
     if Input.key_down?(K_1)
       # 負荷をかける
       5000.times do
-        _x = 200 + rand(WIN_W - 200)
-        _y = rand(WIN_H)
+        _x = rand(200...WIN_W)
+        _y = rand(0...WIN_H)
         Window.draw_circle_fill(
           _x, _y, 10 + rand(20), [100, rand(256), rand(256), rand(200)]
         )
