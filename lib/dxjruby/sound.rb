@@ -19,6 +19,9 @@ module DXJRuby
     ## attr_accessor :decoded
 
     # Play this sound
+    #
+    # DXRuby では Sound#loop_count でループを制御している
+    # https://mirichi.github.io/dxruby-doc/api/Sound_23play.html
     def play(loop_ = false)
       @j_sound.play(loop_)
     end
