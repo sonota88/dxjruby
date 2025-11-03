@@ -14,7 +14,7 @@ import dxjruby.util.Utils;
 
 public class Image {
 
-    final BufferedImage img;
+    private final BufferedImage img;
 
     private Image(final BufferedImage img) {
         this.img = img;
@@ -43,11 +43,14 @@ public class Image {
         return img.getHeight();
     }
 
+    /**
+     * @return [a, r, g, b]
+     */
     public List<Integer> getPixel(
             final int x, final int y
             ) {
         final int[] rgba = new int[] { 0, 0, 0, 0 };
-        img.getData().getPixel(x, y, rgba);
+        img.getRaster().getPixel(x, y, rgba);
 
         return List.of(
                 Integer.valueOf(rgba[3]), // a

@@ -28,6 +28,9 @@ Window.load_resources do
   img2[1, 5] = [11, 12, 13, 14]
   p ["get pixel", img2[1, 5]]
 
+  # Image[:img1]._resize(8, 16)
+  # Image[:img1].circle_fill(0, 0, 12, [255,0,0])
+
   Window.loop do
     Window.draw(10, 20, Image[:img1])
     Window.draw(Input.mouse_x - 16, Input.mouse_y - 16, img2)
