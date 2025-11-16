@@ -1,5 +1,8 @@
 package dxjruby.sound;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
@@ -16,7 +19,8 @@ public abstract class SoundBase {
 
     private AudioData audioData;
     private int volume = 255; // 0<=..<=255
-    private Clip clip;
+    private Set<Clip> clips = new HashSet<>();
+    private Clip currentClip = null;
 
     protected void init(AudioData audioData) {
         this.audioData = audioData;
@@ -26,7 +30,7 @@ public abstract class SoundBase {
     }
 
     public void play(final boolean loop) {
-        this.clip = createClip(getAudioData());
+        final Clip clip = createClip(getAudioData());
 
         final FloatControl ctrl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 
@@ -48,18 +52,37 @@ public abstract class SoundBase {
             public void update(LineEvent event) {
                 if (event.getType() == LineEvent.Type.STOP) {
                     clip.close();
+                    removeClip(clip);
                 }
             }};
         clip.addLineListener(lineListener);
 
         clip.setFramePosition(0);
         clip.start();
+
+        // 再生が終了するまでは参照を保持しておく
+        addClip(clip);
+    }
+
+    private void addClip(final Clip clip) {
+        synchronized (this.clips) {
+            this.clips.add(clip);
+            this.currentClip = clip;
+        }
+    }
+
+    private void removeClip(final Clip clip) {
+        synchronized (this.clips) {
+            this.clips.remove(clip);
+            this.currentClip = null;
+        }
     }
 
     public void stop() {
-        if (this.clip != null) {
-            this.clip.stop();
-            this.clip.close();
+        synchronized (this.clips) {
+            if (this.currentClip != null) {
+                this.currentClip.stop();
+            }
         }
     }
 
