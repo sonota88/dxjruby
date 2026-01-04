@@ -40,8 +40,8 @@ module DXJRuby
         "K_I  KeyI  VK_I",
         "K_O  KeyO  VK_O",
         "K_P  KeyP  VK_P",
-        # K_LBRACKET = 'BracketLeft'
-        # K_RBRACKET = 'BracketRight'
+        "K_LBRACKET  BracketLeft   VK_OPEN_BRACKET",
+        "K_RBRACKET  BracketRight  VK_CLOSE_BRACKET",
         "K_RETURN  Enter  VK_ENTER",
         "K_ENTER   Enter  VK_ENTER", # Alias; not in DXRuby
         "K_LCONTROL  ControlLeft  VK_CONTROL",
@@ -58,7 +58,7 @@ module DXJRuby
         # K_APOSTROPHE = 'Quote'  # '
         # K_GRAVE = "Backquote"   # `
         "K_LSHIFT  ShiftLeft  VK_SHIFT",
-        # K_BACKSLASH = 'BackSlash'  # Note: different to K_YEN
+        "K_BACKSLASH  BackSlash  VK_BACK_SLASH",  # Note: different to K_YEN
         "K_Z  KeyZ  VK_Z",
         "K_X  KeyX  VK_X",
         "K_C  KeyC  VK_C",
@@ -84,7 +84,7 @@ module DXJRuby
         "K_F8   F8   VK_F8",
         "K_F9   F9   VK_F9",
         "K_F10  F10  VK_F10",
-        # K_NUMLOCK = "NumLock"
+        "K_NUMLOCK  NumLock  VK_NUM_LOCK",
         "K_SCROLL  ScrollLock  VK_SCROLL_LOCK",
         "K_NUMPAD7  Numpad7  VK_NUMPAD7",
         "K_NUMPAD8  Numpad8  VK_NUMPAD8",
@@ -114,7 +114,7 @@ module DXJRuby
         # #K_NUMPADEQUALS  = *3 *1
         # #K_PREVTRACK
         # #K_AT
-        # K_COLON = 'Colon'
+        "K_COLON  Colon  VK_COLON",
         # K_UNDERLINE = 'IntlRo'   # _
         # #K_KANJI 
         # #K_STOP

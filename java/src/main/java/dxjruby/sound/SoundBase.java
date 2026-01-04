@@ -43,10 +43,6 @@ public abstract class SoundBase {
 
         ctrl.setValue(db);
 
-        if (loop) {
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-        }
-
         final LineListener lineListener = new LineListener() {
             @Override
             public void update(LineEvent event) {
@@ -58,7 +54,11 @@ public abstract class SoundBase {
         clip.addLineListener(lineListener);
 
         clip.setFramePosition(0);
-        clip.start();
+        if (loop) {
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } else {
+            clip.start();
+        }
 
         // 再生が終了するまでは参照を保持しておく
         addClip(clip);
