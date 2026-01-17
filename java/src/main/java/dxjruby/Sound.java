@@ -1,5 +1,6 @@
 package dxjruby;
 
+import java.util.Base64;
 import java.util.List;
 
 import dxjruby.sound.FileSound;
@@ -13,6 +14,13 @@ public class Sound {
             final String path
             ) {
         return new FileSound(path);
+    }
+
+    public static FileSound createSoundFromMemory(
+            final String base64str
+            ) {
+        final byte[] byteArray = Base64.getDecoder().decode(base64str);
+        return new FileSound(byteArray);
     }
 
     public static SoundEffect createSoundEffect(

@@ -1,0 +1,15 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    base64 (0.3.0)
+    wavefile (1.1.2)
+
+PLATFORMS
+  universal-java-21
+
+DEPENDENCIES
+  base64 (= 0.3.0)
+  wavefile (= 1.1.2)
+
+BUNDLED WITH
+   2.6.9

@@ -1,7 +1,11 @@
 package dxjruby.sound;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +25,37 @@ public class FileSound extends SoundBase {
         init(audioData);
     }
 
+    public FileSound(final byte[] byteArray) {
+        final AudioData audioData = readAudioData(byteArray);
+
+        init(audioData);
+    }
+
     private static AudioData readAudioData(final File file) {
         try (
-                final AudioInputStream ais = AudioSystem.getAudioInputStream(file);
+                final InputStream is = new FileInputStream(file);
+        ) {
+            return readAudioData(is);
+        } catch (FileNotFoundException e1) {
+            throw new DXJRubyException(e1);
+        } catch (IOException e2) {
+            throw new DXJRubyException(e2);
+        }
+    }
+
+    private static AudioData readAudioData(final byte[] byteArray) {
+        try (
+                final InputStream is = new ByteArrayInputStream(byteArray);
+        ) {
+            return readAudioData(is);
+        } catch (IOException e) {
+            throw new DXJRubyException(e);
+        }
+    }
+
+    private static AudioData readAudioData(final InputStream is) {
+        try (
+                final AudioInputStream ais = AudioSystem.getAudioInputStream(is);
         ) {
             final AudioFormat format = ais.getFormat();
 
