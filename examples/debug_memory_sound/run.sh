@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function print_this_dir() {
   if [ -L "$0" ]; then
