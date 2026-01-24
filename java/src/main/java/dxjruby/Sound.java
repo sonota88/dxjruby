@@ -16,6 +16,9 @@ public class Sound {
         return new FileSound(path);
     }
 
+    /**
+     * @param base64str base64-encoded RIFF WAV
+     */
     public static FileSound createSoundFromMemory(
             final String base64str
             ) {

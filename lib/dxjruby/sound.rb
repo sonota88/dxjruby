@@ -14,6 +14,7 @@ module DXJRuby
 
     def initialize(path_or_url)
       if path_or_url.start_with?(DATA_URL_HEAD)
+        # base64-encoded RIFF WAV
         b64str = path_or_url[DATA_URL_HEAD.size..]
         j_sound = Sound.j_Sound.create_sound_from_memory(b64str)
         _initialize("(data_url)", j_sound)
