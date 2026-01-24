@@ -2,8 +2,6 @@ package dxjruby.sound;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -33,49 +31,48 @@ public class FileSound extends SoundBase {
 
     private static AudioData readAudioData(final File file) {
         try (
-                final InputStream is = new FileInputStream(file);
+                final AudioInputStream ais = AudioSystem.getAudioInputStream(file);
         ) {
-            return readAudioData(is);
-        } catch (FileNotFoundException e1) {
+            return readAudioData(ais);
+        } catch (IOException e1) {
             throw new DXJRubyException(e1);
-        } catch (IOException e2) {
+        } catch (UnsupportedAudioFileException e2) {
             throw new DXJRubyException(e2);
         }
+
     }
 
     private static AudioData readAudioData(final byte[] byteArray) {
         try (
                 final InputStream is = new ByteArrayInputStream(byteArray);
+                final AudioInputStream ais = AudioSystem.getAudioInputStream(is);
         ) {
-            return readAudioData(is);
-        } catch (IOException e) {
-            throw new DXJRubyException(e);
+            return readAudioData(ais);
+        } catch (IOException e1) {
+            throw new DXJRubyException(e1);
+        } catch (UnsupportedAudioFileException e2) {
+            throw new DXJRubyException(e2);
         }
     }
 
-    private static AudioData readAudioData(final InputStream is) {
-        try (
-                final AudioInputStream ais = AudioSystem.getAudioInputStream(is);
-        ) {
-            final AudioFormat format = ais.getFormat();
+    private static AudioData readAudioData(final AudioInputStream ais) throws IOException {
+        final AudioFormat format = ais.getFormat();
 
-            final byte[] buf = new byte[1024];
-            final List<Byte> byteList = new ArrayList<>(1024);
+        final byte[] buf = new byte[1024];
+        final List<Byte> byteList = new ArrayList<>(1024);
 
-            while (true) {
-                final int n = ais.read(buf);
-                if (n == -1) {
-                    break;
-                } else {
-                    for (int i = 0; i < n; i++) {
-                        byteList.add(Byte.valueOf(buf[i]));
-                    }
+        while (true) {
+            int n;
+                n = ais.read(buf);
+            if (n == -1) {
+                break;
+            } else {
+                for (int i = 0; i < n; i++) {
+                    byteList.add(Byte.valueOf(buf[i]));
                 }
             }
-            return new AudioData(toArray(byteList), format);
-        } catch (IOException | UnsupportedAudioFileException e) {
-            throw new DXJRubyException(e);
         }
+        return new AudioData(toArray(byteList), format);
     }
 
     private static byte[] toArray(final List<Byte> byteList) {
