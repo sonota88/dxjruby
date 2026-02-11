@@ -17,8 +17,7 @@ RESOURCE_DIR =
   end
 
 Sound.register(:s1, File.join(RESOURCE_DIR, "s1.wav"))
-Sound.register(:bgm, File.join(RESOURCE_DIR, "bgm_1ch.wav"))
-# Sound.register(:bgm, File.join(RESOURCE_DIR, "bgm_2ch.wav"))
+Sound.register(:bgm, File.join(RESOURCE_DIR, "bgm_2ch.wav"))
 
 def scope() yield end
 

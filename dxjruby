@@ -81,6 +81,8 @@ case $cmd in
      cmd_doctor
 ;; info )
      cmd_info "$@"
+;; jruby-version )
+     echo $JRUBY_VER
 ;; run )
      ${JRUBY_DIR}/bin/jruby -I "${__DIR__}/lib" "$@"
 ;; help | -h | --help )

@@ -15,7 +15,8 @@ readonly DXJRUBY_DIR="$(
   pwd
 )"
 
-readonly JRUBY_CMD=${DXJRUBY_DIR}/jruby-10.0.2.0/bin/jruby
+readonly JRUBY_VER="$(${DXJRUBY_DIR}/dxjruby jruby-version)"
+readonly JRUBY_CMD="${DXJRUBY_DIR}/jruby-${JRUBY_VER}/bin/jruby"
 
 # --------------------------------
 

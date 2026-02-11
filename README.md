@@ -7,16 +7,18 @@ DXRuby/DXOpal の JRuby 移植です。
 ```sh
   # JRuby 処理系のダウンロードなど
 ./dxjruby setup
+
+  # dxjruby-{version}.jar のビルド
+(
+  cd java
+  ./build.sh make-jar
+)
 ```
 
 
 # Run example
 
 ```sh
-(
-  cd java
-  ./build.sh make-jar
-)
 ./dxjruby run examples/dxopal/top_page/main.rb
 ```
 
