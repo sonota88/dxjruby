@@ -11,7 +11,7 @@ function print_this_dir() {
 }
 
 readonly __DIR__="$(print_this_dir)"
-readonly JRUBY_VER=10.0.2.0
+readonly JRUBY_VER=10.0.3.0
 readonly JRUBY_DIR="${__DIR__}/jruby-${JRUBY_VER}"
 
 function print_help() {
