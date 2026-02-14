@@ -22,11 +22,28 @@ public class Image {
 
     public static Image load(final String path) {
         final File file = new File(path);
+
+        final BufferedImage rawImg;
         try {
-            return new Image(ImageIO.read(file));
+            rawImg = ImageIO.read(file);
         } catch (IOException e) {
             throw new DXJRubyException(e);
         }
+
+        final BufferedImage rgbaImg = toRgbaImage(rawImg);
+        return new Image(rgbaImg);
+    }
+
+    private static BufferedImage toRgbaImage(final BufferedImage img) {
+        final int w = img.getWidth();
+        final int h = img.getHeight();
+
+        final BufferedImage newImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+
+        final int[] pixels = img.getRGB(0, 0, w, h, null, 0, w);
+        newImg.setRGB(0, 0, w, h, pixels, 0, w);
+
+        return newImg;
     }
 
     public static Image createBlank(final int w, final int h) {
@@ -143,6 +160,34 @@ public class Image {
         Utils.withGraphics2D(
                 img.getGraphics(),
                 g2 -> Drawer.triangleFill(g2, x1, y1, x2, y2, x3, y3, color)
+                );
+    }
+
+    public Image getImageData(
+            final int x, final int y,
+            final int w, final int h
+            ) {
+        int w2 = w;
+        if (img.getWidth() < x + w2) {
+            w2 = img.getWidth() - x;
+        }
+        int h2 = h;
+        if (img.getHeight() < y + h2) {
+            h2 = img.getHeight() - y;
+        }
+
+        return new Image(
+                this.img.getSubimage(x, y, w2, h2)
+                );
+    }
+
+    public void putImageData(
+            final Image image,
+            final int x, final int y
+            ) {
+        Utils.withGraphics2D(
+                this.img.getGraphics(),
+                g2 -> g2.drawImage(image.getAwtImage(), 0, 0, null)
                 );
     }
 

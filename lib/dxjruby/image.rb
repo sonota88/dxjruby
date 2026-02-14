@@ -137,26 +137,43 @@ module DXJRuby
     ## 
     ## # Clear this image (i.e. fill with `[0,0,0,0]`)
     ## def clear
-    ## 
-    ## # Return an Image which is a copy of the specified area
-    ## def slice(x, y, width, height)
-    ## 
-    ## # Slice this image into xcount*ycount tiles
-    ## def slice_tiles(xcount, ycount)
-    ## 
+
+    # Return an Image which is a copy of the specified area
+    def slice(x, y, width, height)
+      newimg = Image.new(width, height)
+      data = _image_data(x, y, width, height)
+      newimg._put_image_data(data)
+      return newimg
+    end
+
+    # Slice this image into xcount*ycount tiles
+    def slice_tiles(xcount, ycount)
+      tile_w = width / xcount
+      tile_h = height / ycount
+      return (0...ycount).flat_map{|v|
+        (0...xcount).map{|u|
+          slice(tile_w * u, tile_h * v, tile_w, tile_h)
+        }
+      }
+    end
+
     ## # Set alpha of the pixels of the given color to 0
     ## # - color : RGB color (If ARGV color is given, A is just ignored)
     ## def set_color_key(color)
     ## 
     ## # Copy an <img> onto this image
     ## def _draw_raw_image(x, y, raw_img)
-    ## 
-    ## # Return .getImageData
-    ## def _image_data(x=0, y=0, w=@width, h=@height)
-    ## 
-    ## # Call .putImageData
-    ## def _put_image_data(image_data, x=0, y=0)
-    ## 
+
+    # Return .getImageData
+    def _image_data(x=0, y=0, w=@width, h=@height)
+      @j_image.get_image_data(x, y, w, h)
+    end
+
+    # Call .putImageData
+    def _put_image_data(image_data, x=0, y=0)
+      @j_image.put_image_data(image_data, x, y)
+    end
+
     ## # Return a string like 'rgb(255, 255, 255)'
     ## # `color` is 3 or 4 numbers
     ## def _rgb(color)
