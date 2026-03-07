@@ -12,6 +12,7 @@ function print_this_dir() {
 
 readonly __DIR__="$(print_this_dir)"
 readonly JRUBY_VER=10.0.4.0
+readonly JRUBY_CHECKSUM_256=d0260ebc753a5e9ae49be1eec0e4eec907aaf2b7184faaafc879b0ec3253ca24
 readonly JRUBY_DIR="${__DIR__}/jruby-${JRUBY_VER}"
 
 function print_help() {
@@ -28,14 +29,26 @@ __HELP
 function cmd_setup() {
   cd $__DIR__
 
-  local url=https://repo1.maven.org/maven2/org/jruby/jruby-dist/${JRUBY_VER}/jruby-dist-${JRUBY_VER}-bin.tar.gz
+  # base name
+  local bname=jruby-dist-${JRUBY_VER}-bin.tar.gz
+
+  local url=https://repo1.maven.org/maven2/org/jruby/jruby-dist/${JRUBY_VER}/${bname}
 
   if which curl; then
-    curl $url -o jruby-dist-${JRUBY_VER}-bin.tar.gz
+    curl $url -o $bname
   elif which wget; then
     wget $url
   else
     echo "please install wget or curl" >&2
+    exit 1
+  fi
+
+  local sum="$(sha256sum $bname | cut -d " " -f 1)"
+
+  if [ "$sum" != "$JRUBY_CHECKSUM_256" ]; then
+    echo "NG ... checksum mismatch (${bname})"
+    echo "expected: ${JRUBY_CHECKSUM_256}"
+    echo "  actual: ${sum}"
     exit 1
   fi
 
