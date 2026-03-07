@@ -16,6 +16,10 @@ RESOURCE_DIR =
 
 Image.register(:img1, File.join(RESOURCE_DIR, "img_ruby.png"))
 
+img_draw1 = Image.new(20, 20, C_BLUE)
+img_draw2 = Image.new(10, 10, C_MAGENTA)
+img_draw1.draw(2, 4, img_draw2)
+
 Window.load_resources do
   img1 = Image[:img1]
   p [img1.width, img1.height]
@@ -34,5 +38,6 @@ Window.load_resources do
   Window.loop do
     Window.draw(10, 20, Image[:img1])
     Window.draw(Input.mouse_x - 16, Input.mouse_y - 16, img2)
+    Window.draw(10, 50, img_draw1)
   end
 end

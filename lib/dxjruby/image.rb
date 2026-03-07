@@ -53,9 +53,11 @@ module DXJRuby
       @j_image = Image.j_Image.create_blank(w, h)
     end
     
-    ## # Draw an Image on this image
-    ## def draw(x, y, image)
-    ## 
+    # Draw an Image on this image
+    def draw(x, y, image)
+      @j_image.draw(x, y, image.to_j)
+    end
+    
     ## # Draw an Image on this image with scaling
     ## # - scale_x, scale_y: scaling factor (eg. 1.5)
     ## # - center_x, center_y: scaling center (in other words, the point
