@@ -261,11 +261,12 @@ def mml_to_samples(mml)
       end
     end
 
-    if t_on
-      samples << ch.osc(t, x) * vol * ch.volume(t)
-    else
-      samples << 0.0
-    end
+    samples <<
+      if t_on
+        ch.osc(t, x) * vol * ch.volume(t)
+      else
+        0.0
+      end
 
     x_delta = f * SEC_PER_SAMPLE
     x += x_delta
