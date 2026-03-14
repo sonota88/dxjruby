@@ -5,10 +5,21 @@ import static dxjruby.util.Utils.toInt;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 
 import dxjruby.DXJRuby;
+import dxjruby.Image;
 
 public class Drawer {
+
+    public static void drawImage(
+            final Graphics2D g2,
+            final double x, final double y,
+            final Image image
+            ) {
+        final BufferedImage awtImage = image.getAwtImage();
+        g2.drawImage(awtImage, toInt(x), toInt(y), null);
+    }
 
     public static void line(
             final Graphics2D g2,

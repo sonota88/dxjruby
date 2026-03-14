@@ -1,7 +1,5 @@
 package dxjruby;
 
-import static dxjruby.util.Utils.toInt;
-
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -65,7 +63,7 @@ public class Image {
     public void draw(final double x, final double y, final Image image) {
         Utils.withGraphics2D(
                 this.img.getGraphics(),
-                g2 -> g2.drawImage(image.getAwtImage(), toInt(x), toInt(y), null)
+                g2 -> Drawer.drawImage(g2, x, y, image)
                 );
     }
 

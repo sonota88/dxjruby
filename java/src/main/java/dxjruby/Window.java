@@ -10,7 +10,6 @@ import java.awt.RenderingHints;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 import java.util.function.Consumer;
 
 import javax.swing.JFrame;
@@ -84,10 +83,8 @@ public class Window {
             ) {
         addToDrawQueue(
                 z,
-                g2 -> {
-                    final BufferedImage img = image.getAwtImage();
-                    g2.drawImage(img, toInt(x), toInt(y), null);
-                });
+                g2 -> Drawer.drawImage(g2, x, y, image)
+                );
     }
 
     public static void drawEx(
