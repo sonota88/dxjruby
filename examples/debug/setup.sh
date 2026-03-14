@@ -22,7 +22,7 @@ readonly JRUBY_CMD="${DXJRUBY_DIR}/jruby-${JRUBY_VER}/bin/jruby"
 
 cd $__DIR__
 
-$JRUBY_CMD setup.rb
+$JRUBY_CMD setup_sound.rb
 
 # export RBENV_ROOT=${HOME}/.anyenv/envs/rbenv
 # eval "$(rbenv init - --no-rehash bash)"
