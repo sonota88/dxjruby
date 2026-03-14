@@ -63,8 +63,8 @@ class MainPanel extends JComponent {
             DrawQueue.takeSnapshot();
             return;
         } else {
-            // 描画処理の最中は this.drawQueue を更新しないこと
-            drawQueueSnapshot = DrawQueue.takeSnapshot();
+            // 描画処理の最中は this.drawQueueSnapshot を更新しないこと
+            this.drawQueueSnapshot = DrawQueue.takeSnapshot();
         }
 
         painting = true;

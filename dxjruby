@@ -67,6 +67,16 @@ function cmd_doctor() {
 
   : ----
   java -version
+
+  : ----
+  ls -l ${__DIR__}/jruby-${JRUBY_VER}/bin/jruby
+
+  : ----
+  ${__DIR__}/jruby-${JRUBY_VER}/bin/jruby -v
+
+  : ----
+  ls -l ${__DIR__}/dxjruby-*.jar
+  ls -l ${__DIR__}/java/target/dxjruby-*.jar
 }
 
 function cmd_info() {

@@ -22,7 +22,7 @@ public abstract class SoundBase {
     private Set<Clip> clips = new HashSet<>();
     private Clip currentClip = null;
 
-    protected void init(AudioData audioData) {
+    protected void init(final AudioData audioData) {
         this.audioData = audioData;
 
         // 初回再生時の遅延防止
