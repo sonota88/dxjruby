@@ -77,8 +77,8 @@ public class DrawQueue {
 
         private final Consumer<Graphics2D> func;
 
-        public Command(final Consumer<Graphics2D> proc) {
-            this.func = proc;
+        public Command(final Consumer<Graphics2D> func) {
+            this.func = func;
         }
 
         public void execute(final Graphics2D g2) {
