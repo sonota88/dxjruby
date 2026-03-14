@@ -1,6 +1,9 @@
 case RUBY_ENGINE
 when "opal"  then require "dxopal"
 when "jruby" then require "dxjruby"
+when "ruby"
+  require "dxruby"
+  require_relative "dxruby_helper"
 else raise "unsupported engine (#{RUBY_ENGINE})"
 end
 
@@ -10,6 +13,7 @@ RESOURCE_DIR =
   case RUBY_ENGINE
   when "opal"  then "."
   when "jruby" then __dir__
+  when "ruby"  then __dir__
   else
     raise "unsupported engine (#{RUBY_ENGINE})"
   end
