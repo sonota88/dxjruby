@@ -1,4 +1,5 @@
 require 'dxjruby/remote_resource'
+require 'fileutils'
 
 module DXJRuby
   class Sound < RemoteResource
@@ -22,18 +23,33 @@ module DXJRuby
         extname = File.extname(path_or_url).downcase
         case extname
         when ".ogg", ".oga"
-          f_wav = path_or_url + ".wav"
-          unless File.exist?(f_wav)
-            system(
-              %(oggdec --quiet --output "#{f_wav}" "#{path_or_url}"),
-              exception: true
-            )
+          _with_ogg_wavfile(path_or_url) do |wavfile|
+            j_sound = Sound.j_Sound.create_sound(wavfile)
+            _initialize(path_or_url, j_sound)
           end
-          j_sound = Sound.j_Sound.create_sound(f_wav)
-          _initialize(path_or_url, j_sound)
         else
           j_sound = Sound.j_Sound.create_sound(path_or_url)
           _initialize(path_or_url, j_sound)
+        end
+      end
+    end
+
+    def _with_ogg_wavfile(path_or_url)
+      wavfile = path_or_url + ".temp.wav"
+
+      if File.exist?(wavfile)
+        raise "wav file exists (#{wavfile})"
+      else
+        begin
+          system(
+            "oggdec", "--quiet", "--output", wavfile, path_or_url,
+            exception: true
+          )
+          yield wavfile
+        ensure
+          if File.exist?(wavfile)
+            FileUtils.rm wavfile
+          end
         end
       end
     end
