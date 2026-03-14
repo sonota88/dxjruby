@@ -112,8 +112,8 @@ public abstract class SoundBase {
 
     // --------------------------------
 
-      public void setVolume(final int volume) {
-          this.volume = volume;
-      }
+    public void setVolume(final int volume) {
+        this.volume = volume;
+    }
 
 }

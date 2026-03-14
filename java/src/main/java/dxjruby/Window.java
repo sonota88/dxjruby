@@ -179,10 +179,8 @@ public class Window {
     }
 
     public static void drawBox(
-            final double x1,
-            final double y1,
-            final double x2,
-            final double y2,
+            final double x1, final double y1,
+            final double x2, final double y2,
             final Color color,
             final int z
             ) {
@@ -193,10 +191,8 @@ public class Window {
     }
 
     public static void drawBoxFill(
-            final double x1,
-            final double y1,
-            final double x2,
-            final double y2,
+            final double x1, final double y1,
+            final double x2, final double y2,
             final Color color,
             final int z
             ) {
